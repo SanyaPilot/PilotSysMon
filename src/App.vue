@@ -1,28 +1,78 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      color="primary"
+      app
+      clipped-left
+    >
+      <v-app-bar-nav-icon
+        @click="drawer.expanded = !drawer.expanded"
+      ></v-app-bar-nav-icon>
+      <v-toolbar-title>PilotSysMon</v-toolbar-title>
+    </v-app-bar>
+
+    <v-navigation-drawer
+      app
+      clipped
+      permanent
+      :mini-variant="!drawer.expanded"
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="drawer.selectedItem"
+          color="primary"
+          mandatory
+        >
+          <v-list-item
+            v-for="(item, i) in drawer.items"
+            :key="i"
+            @click.stop="changeMainView(item.view)"
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title v-text="item.text"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data: () => ({
+    count: 0,
+    drawer: {
+      expanded: true,
+      selectedItem: 0,
+      items: [
+        { text: 'System Info', icon: 'mdi-folder', view: 'sysinfo' },
+        { text: 'Shared with me', icon: 'mdi-account-multiple', view: 'bar' },
+      ]
+    },
+  }),
+  methods: {
+    changeMainView(view) {
+      this.$router.push(view)
+    }
+  },
+  mounted () {
+    console.log(this.$vuetify.breakpoint)
+  }
+};
+</script>
