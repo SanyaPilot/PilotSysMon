@@ -6,15 +6,15 @@ import vuetify from './plugins/vuetify'
 // Components
 import App from './App.vue'
 import SysInfo from './components/SysInfo.vue'
-import BarItem from './components/bar.vue'
+import CPUInfo from './components/CPUInfo.vue'
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
 const routes = [
   { path: '/', redirect: '/sysinfo' },
-  { path: '/sysinfo', component: SysInfo },
-  { path: '/bar', component: BarItem }
+  { path: '/sysinfo', name: 'sysinfo', component: SysInfo },
+  { path: '/cpu', name: 'cpu', component: CPUInfo }
 ]
 
 const router = new VueRouter({

@@ -45,7 +45,9 @@
 
     <v-main>
       <v-container fluid>
-        <router-view></router-view>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </v-container>
     </v-main>
   </v-app>
@@ -62,17 +64,24 @@ export default {
       selectedItem: 0,
       items: [
         { text: 'System Info', icon: 'mdi-folder', view: 'sysinfo' },
-        { text: 'Shared with me', icon: 'mdi-account-multiple', view: 'bar' },
+        { text: 'CPU', icon: 'mdi-cpu-64-bit', view: 'cpu' },
       ]
     },
   }),
   methods: {
     changeMainView(view) {
       this.$router.push(view)
+    },
+    getSelectedItem() {
+      this.drawer.selectedItem = this.drawer.items.findIndex(e => e.view == this.$route.name)
     }
+  },
+  created () {
+    this.getSelectedItem()
   },
   mounted () {
     console.log(this.$vuetify.breakpoint)
+    console.log(this.$vuetify)
   }
 };
 </script>
