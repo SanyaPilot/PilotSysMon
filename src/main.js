@@ -7,6 +7,7 @@ import vuetify from './plugins/vuetify'
 import App from './App.vue'
 import SysInfo from './components/SysInfo.vue'
 import CPUInfo from './components/CPUInfo.vue'
+import DisksInfo from './components/DisksInfo.vue'
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
@@ -14,7 +15,8 @@ Vue.config.productionTip = false
 const routes = [
   { path: '/', redirect: '/sysinfo' },
   { path: '/sysinfo', name: 'sysinfo', component: SysInfo },
-  { path: '/cpu', name: 'cpu', component: CPUInfo }
+  { path: '/cpu', name: 'cpu', component: CPUInfo },
+  { path: '/disks', name: 'disks', component: DisksInfo }
 ]
 
 const router = new VueRouter({

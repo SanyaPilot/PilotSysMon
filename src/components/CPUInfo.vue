@@ -91,7 +91,7 @@ import CPUDetails from './import/CPUDetails.vue'
 import { getCPUSummaryData, getCPUInfoData } from '../API/cpu.js'
 
 export default {
-  name: 'SysInfo',
+  name: 'CPUInfo',
 
   components: {
     LineChart,
