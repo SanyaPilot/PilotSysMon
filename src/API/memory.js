@@ -1,9 +1,9 @@
 import makeRequest from './common.js'
 
-export async function getMemoryData() {
-  return await makeRequest('/memory')
-}
-
-export async function getMemoryHumanData() {
-  return await makeRequest('/memory?human=true')
+export default async function getMemoryData(human) {
+  if (!human) {
+    return await makeRequest('/memory')
+  } else {
+    return await makeRequest('/memory?human=true')
+  }
 }

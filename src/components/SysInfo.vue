@@ -31,7 +31,7 @@ import { mdiWifiStrength3, mdiLanPending, mdiClockOutline, mdiServer } from '@md
 
 import getOSData from '../API/os.js'
 import { getCPUSummaryData } from '../API/cpu.js'
-import { getMemoryHumanData } from '../API/memory.js'
+import getMemoryData from '../API/memory.js'
 import { getInterfaceAddressesData, getActiveInterface, getHostname } from '../API/network.js'
 import getTimeData from '../API/time.js'
 import getPythonData from '../API/python.js'
@@ -87,7 +87,7 @@ export default {
     },
     async updateHardwareData() {
       const cpu = await getCPUSummaryData()
-      const memory = await getMemoryHumanData()
+      const memory = await getMemoryData(true)
       const ram = memory.ram
       const swap = memory.swap
       this.cards.hardware.data = [
