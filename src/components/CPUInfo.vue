@@ -7,14 +7,6 @@
             <v-card hover>
               <v-card-title class="justify-space-between">
                 {{ cpuName }}
-                <!--<v-img
-                  v-if="card.iconType == 'svg'"
-                  :src="card.icon == 'os' ? getOSIcon : card.icon"
-                  contain
-                  max-height="120"
-                  max-width="120"
-                ></v-img>
-                <v-icon v-else size=120> {{card.icon == 'network' ? getNetworkIcon : card.icon}} </v-icon>-->
               </v-card-title>
               <v-card-text class="d-flex justify-space-around">
                 <v-progress-circular
@@ -89,6 +81,8 @@
 import LineChart from '../charts/lineChart.js'
 import CPUDetails from './import/CPUDetails.vue'
 import { getCPUSummaryData, getCPUInfoData } from '../API/cpu.js'
+
+let updateTimer
 
 export default {
   name: 'CPUInfo',
@@ -184,13 +178,21 @@ export default {
     }
   }),
   async created() {
-    let context = this
     await this.updateCPUInfoData()
-    setInterval(async function() {
+    await this.updateCPUSummaryData()
+    this.updateLoadChart()
+    this.updateFreqChart()
+  },
+  async activated() {
+    let context = this
+    updateTimer = setInterval(async function() {
       await context.updateCPUSummaryData()
       context.updateLoadChart()
       context.updateFreqChart()
     }, 1000)
+  },
+  deactivated() {
+    clearInterval(updateTimer)
   },
   methods: {
     updateLoadChart () {

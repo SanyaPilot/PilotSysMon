@@ -84,6 +84,9 @@
 <script>
 import getMemoryData from '../API/memory.js'
 import LineChart from '../charts/lineChart.js'
+
+let updateTimer
+
 export default {
   name: 'MemoryInfo',
 
@@ -167,15 +170,19 @@ export default {
     if (this.swapInfo) {
       this.updateSwapChart()
     }
+  },
+  async activated() {
     let context = this
-    setInterval(async function() {
+    updateTimer = setInterval(async function() {
       await context.updateData()
       context.updateRAMChart()
       if (context.swapInfo) {
         context.updateSwapChart()
       }
     }, 1000)
-    console.log(this.ramInfo.Percent)
+  },
+  deactivated() {
+    clearInterval(updateTimer)
   },
   methods: {
     async updateData() {
