@@ -66,7 +66,8 @@ export default {
         { text: 'System Info', icon: 'mdi-folder', view: 'sysinfo' },
         { text: 'CPU', icon: 'mdi-cpu-64-bit', view: 'cpu' },
         { text: 'Disks', icon: 'mdi-database', view: 'disks'},
-        { text: 'Memory', icon: 'mdi-memory', view: 'memory' }
+        { text: 'Memory', icon: 'mdi-memory', view: 'memory' },
+        { text: 'Network', icon: 'mdi-server-network', view: 'network' }
       ]
     },
   }),
