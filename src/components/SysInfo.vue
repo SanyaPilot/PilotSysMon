@@ -1,29 +1,32 @@
 <template>
-  <v-row>
-    <v-col cols=12 md=4 v-for="(card, name) in cards" :key="name">
-      <v-card hover>
-        <v-card-title class="title-img">
-          {{card.label}}
-          <v-img
-            v-if="card.data && card.iconType == 'svg'"
-            :src="card.icon == 'os' ? getOSIcon : card.icon"
-            contain
-            max-height="120"
-            max-width="120"
-          ></v-img>
-          <v-icon v-else-if="card.data" size=120> {{card.icon == 'network' ? getNetworkIcon : card.icon}} </v-icon>
-        </v-card-title>
-        <v-card-text v-if="card.data">
-          <table class="data-table">
-            <tr v-for="item in card.data" :key="item.name">
-              <td><b>{{item.name}}</b></td>
-              <td class="table-value">{{item.value}}</td>
-            </tr>
-          </table>
-        </v-card-text>
-      </v-card>
-    </v-col>
-  </v-row>
+  <div>
+    <panel-header>About system</panel-header>
+    <v-row>
+      <v-col cols=12 md=4 v-for="(card, name) in cards" :key="name">
+        <v-card hover>
+          <v-card-title class="title-img">
+            {{card.label}}
+            <v-img
+              v-if="card.data && card.iconType == 'svg'"
+              :src="card.icon == 'os' ? getOSIcon : card.icon"
+              contain
+              max-height="120"
+              max-width="120"
+            ></v-img>
+            <v-icon v-else-if="card.data" size=120> {{card.icon == 'network' ? getNetworkIcon : card.icon}} </v-icon>
+          </v-card-title>
+          <v-card-text v-if="card.data">
+            <table class="data-table">
+              <tr v-for="item in card.data" :key="item.name">
+                <td><b>{{item.name}}</b></td>
+                <td class="table-value">{{item.value}}</td>
+              </tr>
+            </table>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -36,8 +39,14 @@ import { getInterfaceAddressesData, getActiveInterface, getHostname } from '../A
 import getTimeData from '../API/time.js'
 import getPythonData from '../API/python.js'
 
+import PanelHeader from './import/PanelHeader.vue'
+
 export default {
   name: 'SysInfo',
+
+  components: {
+    PanelHeader
+  },
 
   data: () => ({
     cards: {

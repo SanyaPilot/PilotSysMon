@@ -1,89 +1,93 @@
 <template>
-  <v-row>
-    <v-col cols=12 md=4>
-      <v-row>
-        <v-col cols=12>
-          <v-card hover>
-            <v-card-title>RAM Load</v-card-title>
-            <v-card-text class="d-flex justify-space-between">
-              <v-progress-circular
-                size=300
-                width=15
-                rotate=180
-                :value="ram.percents.at(-1)"
-                color="primary"
-                style="margin-right:10px;"
-              >
-                <span style="font-size: 3rem">{{ ram.percents.at(-1) }} %</span>
-              </v-progress-circular>
-              <table class="memory-table">
-                <tr v-for="(value, name) in ramInfo" :key="name">
-                  <td><b>{{ name }}</b></td>
-                  <td style="padding-left: 10px;">{{ value }}</td>
-                </tr>
-              </table>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols=12 v-if="swapInfo">
-          <v-card hover>
-            <v-card-title>Swap Load</v-card-title>
-            <v-card-text class="d-flex justify-space-between">
-              <v-progress-circular
-                size=300
-                width=15
-                rotate=180
-                :value="swap.percents.at(-1)"
-                color="primary"
-                style="margin-right:10px;"
-              >
-                <span style="font-size: 3rem">{{ swap.percents.at(-1) }} %</span>
-              </v-progress-circular>
-              <table class="memory-table">
-                <tr v-for="(value, name) in swapInfo" :key="name">
-                  <td><b>{{ name }}</b></td>
-                  <td style="padding-left: 10px;">{{ value }}</td>
-                </tr>
-              </table>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-col>
-    <v-col cols=12 md=8>
-      <v-row>
-        <v-col cols=12>
-          <v-card hover>
-            <v-card-title>
-              RAM load chart
-            </v-card-title>
-            <v-card-text>
-              <div v-if="ramChart.datacollection">
-                <line-chart style="height:300px;" :chart-data="ramChart.datacollection" :options="ramChart.options"></line-chart>
-              </div>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols=12 v-if="swapInfo">
-          <v-card hover>
-            <v-card-title>
-              Swap load chart
-            </v-card-title>
-            <v-card-text>
-              <div v-if="swapChart.datacollection">
-                <line-chart style="height:300px;" :chart-data="swapChart.datacollection" :options="swapChart.options"></line-chart>
-              </div>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-col>
-  </v-row>
+  <div>
+    <panel-header>System memory info</panel-header>
+    <v-row>
+      <v-col cols=12 md=4>
+        <v-row>
+          <v-col cols=12>
+            <v-card hover>
+              <v-card-title>RAM Load</v-card-title>
+              <v-card-text class="d-flex justify-space-between">
+                <v-progress-circular
+                  size=300
+                  width=15
+                  rotate=180
+                  :value="ram.percents.at(-1)"
+                  color="primary"
+                  style="margin-right:10px;"
+                >
+                  <span style="font-size: 3rem">{{ ram.percents.at(-1) }} %</span>
+                </v-progress-circular>
+                <table class="memory-table">
+                  <tr v-for="(value, name) in ramInfo" :key="name">
+                    <td><b>{{ name }}</b></td>
+                    <td style="padding-left: 10px;">{{ value }}</td>
+                  </tr>
+                </table>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols=12 v-if="swapInfo">
+            <v-card hover>
+              <v-card-title>Swap Load</v-card-title>
+              <v-card-text class="d-flex justify-space-between">
+                <v-progress-circular
+                  size=300
+                  width=15
+                  rotate=180
+                  :value="swap.percents.at(-1)"
+                  color="primary"
+                  style="margin-right:10px;"
+                >
+                  <span style="font-size: 3rem">{{ swap.percents.at(-1) }} %</span>
+                </v-progress-circular>
+                <table class="memory-table">
+                  <tr v-for="(value, name) in swapInfo" :key="name">
+                    <td><b>{{ name }}</b></td>
+                    <td style="padding-left: 10px;">{{ value }}</td>
+                  </tr>
+                </table>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col cols=12 md=8>
+        <v-row>
+          <v-col cols=12>
+            <v-card hover>
+              <v-card-title>
+                RAM load chart
+              </v-card-title>
+              <v-card-text>
+                <div v-if="ramChart.datacollection">
+                  <line-chart style="height:300px;" :chart-data="ramChart.datacollection" :options="ramChart.options"></line-chart>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols=12 v-if="swapInfo">
+            <v-card hover>
+              <v-card-title>
+                Swap load chart
+              </v-card-title>
+              <v-card-text>
+                <div v-if="swapChart.datacollection">
+                  <line-chart style="height:300px;" :chart-data="swapChart.datacollection" :options="swapChart.options"></line-chart>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
 import getMemoryData from '../API/memory.js'
 import LineChart from '../charts/lineChart.js'
+import PanelHeader from './import/PanelHeader.vue'
 
 let updateTimer
 
@@ -91,7 +95,8 @@ export default {
   name: 'MemoryInfo',
 
   components: {
-    LineChart
+    LineChart,
+    PanelHeader
   },
 
   data: () => ({

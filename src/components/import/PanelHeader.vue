@@ -1,7 +1,7 @@
 <template>
-<h3 class="text-md-h3 text-h5 pb-4">
+<h4 class="text-md-h4 text-h5 pb-4 pt-1">
   <slot></slot>
-</h3>
+</h4>
 </template>
 
 <script>
