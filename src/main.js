@@ -10,8 +10,10 @@ import CPUInfo from './components/CPUInfo.vue'
 import DisksInfo from './components/DisksInfo.vue'
 import MemoryInfo from './components/MemoryInfo.vue'
 import NetworkInfo from './components/NetworkInfo.vue'
+import LogsInfo from './components/LogsInfo.vue'
 
 Vue.use(VueRouter)
+
 Vue.config.productionTip = false
 
 const routes = [
@@ -20,7 +22,8 @@ const routes = [
   { path: '/cpu', name: 'cpu', component: CPUInfo },
   { path: '/disks', name: 'disks', component: DisksInfo },
   { path: '/memory', name: 'memory', component: MemoryInfo },
-  { path: '/network', name: 'network', component: NetworkInfo }
+  { path: '/network', name: 'network', component: NetworkInfo },
+  { path: '/logs', name: 'logs', component: LogsInfo }
 ]
 
 const router = new VueRouter({
