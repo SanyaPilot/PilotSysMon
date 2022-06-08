@@ -2,7 +2,7 @@
   <div>
     <panel-header>System logs</panel-header>
     <v-row>
-      <v-col cols=12 md=3>
+      <v-col cols=12 md=3 class="py-1">
         <v-select
           label="Priority"
           hint="Messages with this priority will be displayed"
@@ -10,18 +10,21 @@
           :items="loglevels"
           @change="updateLogs()"
           :disabled="loading"
+          :hide-details="hideDetailsCheck"
+          :menu-props="{ offsetX: true }"
         ></v-select>
       </v-col>
-      <v-col cols=12 md=3>
+      <v-col cols=12 md=3 class="py-1">
         <v-text-field
           label="Identfier"
           hint="Logs with this ID will be displayed"
           v-model="id"
           :disabled="loading"
           @change="updateLogs()"
+          :hide-details="hideDetailsCheck"
         ></v-text-field>
       </v-col>
-      <v-col cols=12 md=3>
+      <v-col cols=12 md=2 class="py-1">
         <v-text-field
           label="Boot ID"
           hint="Logs of this boot will be displayed"
@@ -29,9 +32,10 @@
           :rules="validateNumberRule"
           :disabled="loading"
           @change="updateLogs()"
+          :hide-details="hideDetailsCheck"
         ></v-text-field>
       </v-col>
-      <v-col cols=12 md=3>
+      <v-col cols=12 md=4 class="py-1">
         <v-menu
 
           :close-on-content-click="false"
@@ -48,6 +52,7 @@
               readonly
               v-bind="attrs"
               v-on="on"
+              :hide-details="hideDetailsCheck"
             >
               <template v-slot:append-outer>
                 <v-btn
@@ -63,7 +68,7 @@
           <v-date-picker
             range
             v-model="date"
-            @input="updateLogs()"
+            @input="checkDateArray(); updateLogs()"
           ></v-date-picker>
         </v-menu>
       </v-col>
@@ -138,9 +143,9 @@ export default {
     pageCount: null,
     page: 1,
     loglevels: [{text: 'Emergency', value: 'emerg'}, {text: 'Alert and above', value: 'alert'},
-    {text: 'Critical and above', value: 'crit'}, {text: 'Error and above', value: 'error'},
-    {text: 'Warning and above', value: 'warn'}, {text: 'Notice and above', value: 'notice'},
-    {text: 'Info and above', value: 'info'}, {text: 'Debug and above', value: 'debug'}],
+                {text: 'Critical and above', value: 'crit'}, {text: 'Error and above', value: 'error'},
+                {text: 'Warning and above', value: 'warn'}, {text: 'Notice and above', value: 'notice'},
+                {text: 'Info and above', value: 'info'}, {text: 'Debug and above', value: 'debug'}],
     loglevel: 'error',
     id: null,
     boot: 0,
@@ -230,11 +235,30 @@ export default {
       level == 'debug' ? 'mdi-bug' :
       level == 'notice' ? 'mdi-information' :
       level == 'warn' ? 'mdi-alert' : 'mdi-alert-circle'
+    },
+    checkDateArray() {
+      if (this.date.length > 1 && new Date(this.date[0]).getTime() > new Date(this.date[1]).getTime()) {
+        this.date.reverse()
+      }
     }
   },
   computed: {
     localDate() {
-      return this.date ? new Date(this.date).toLocaleDateString({}, {month: 'short', day: 'numeric', year: 'numeric'}) : null
+      if (this.date) {
+        if (this.date.length > 1) {
+            return new Date(this.date[0]).toLocaleDateString({},
+              {month: 'short', day: 'numeric', year: 'numeric'}) + ' ~ ' +
+            new Date(this.date[1]).toLocaleDateString({},
+              {month: 'short', day: 'numeric', year: 'numeric'})
+        } else {
+          return new Date(this.date).toLocaleDateString({}, {month: 'short', day: 'numeric', year: 'numeric'})
+        }
+      } else {
+        return null
+      }
+    },
+    hideDetailsCheck() {
+      return this.$vuetify.breakpoint.mdAndDown ? 'auto' : false
     }
   }
 }
