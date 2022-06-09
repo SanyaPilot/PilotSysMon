@@ -91,14 +91,10 @@
         class="ml-3"></v-progress-circular>
       </div>
     </v-alert>
-    <!--<v-progress-circular
-    v-if="loading"
-    indeterminate
-    size=70></v-progress-circular>-->
     <div v-for="day in paginatedLogs[page - 1]" :key="day[0]">
       <h5 class="text-md-h5 text-h6 mt-3">{{ new Date(day[0] * 24 * 60 * 60 * 1000).toLocaleString(
         {}, {month: 'long', day: 'numeric', year:'numeric'}) }}</h5>
-      <v-simple-table>
+      <v-simple-table v-if="$vuetify.breakpoint.mdAndUp">
         <template v-slot:default>
           <colgroup>
             <col style="width: 56px">
@@ -112,6 +108,26 @@
               <td style="width: 0px" class="text--secondary">{{ msg.time }}</td>
               <td style="width: 0px" class="text--secondary">{{ msg.id }}</td>
               <td class="pl-6">{{ msg.message }}</td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+      <v-simple-table v-else>
+        <template v-slot:default>
+          <colgroup>
+            <col>
+            <col span=2>
+          </colgroup>
+          <tbody>
+            <tr v-for="(msg, key) in day[1]" :key="key">
+              <td class="px-2"><v-icon :color="getIconColor(msg.level)">
+                {{ getIconName(msg.level) }}
+              </v-icon></td>
+              <td style="width: 0px" class="px-2 text--secondary">
+                {{ msg.time }}<br/>
+                {{ msg.id }}
+              </td>
+              <td class="pl-3 pr-0">{{ msg.message }}</td>
             </tr>
           </tbody>
         </template>

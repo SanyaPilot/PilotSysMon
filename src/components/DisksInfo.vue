@@ -4,9 +4,9 @@
     <v-row>
       <v-col cols=12>
         <v-card hover>
-          <v-card-title>Mountpoints</v-card-title>
+          <v-card-title class=pb-2>Mountpoints</v-card-title>
           <v-card-text>
-            <table class="mountpoints-table">
+            <table class="mountpoints-table" v-if="this.$vuetify.breakpoint.mdAndUp">
               <colgroup>
                 <col span="3">
                 <col style="width: 50%;">
@@ -21,6 +21,25 @@
                   <span style="float: right;">{{ usages[mountpoint[0]].used }} / {{ usages[mountpoint[0]].total }}</span>
                   <v-progress-linear :value="usages[mountpoint[0]].percent"></v-progress-linear>
                 </td>
+              </tr>
+            </table>
+            <table
+              v-for="mountpoint in mountpoints.data" :key="mountpoint[0]"
+              class="mountpoints-horiz-table"
+              :style="mountpoint == mountpoints.data[0] ? '' : 'margin-top: 10px'"
+              v-else
+            >
+              <colgroup>
+                <col width="0px">
+                <col>
+              </colgroup>
+              <tr v-for="i in 4" :key="i">
+                <td><b>{{ mountpoints.header[i] }}</b></td>
+                <td class="d-flex pl-3" v-if="mountpoints.header[i] == 'Usage'">
+                  <v-progress-linear class="align-self-center" :value="usages[mountpoint[0]].percent"></v-progress-linear>
+                  <span class="flex-shrink-0 ml-2">{{ usages[mountpoint[0]].used }} / {{ usages[mountpoint[0]].total }}</span>
+                </td>
+                <td class="pl-3" style="overflow-wrap: anywhere;" v-else>{{ mountpoint[i] }}</td>
               </tr>
             </table>
           </v-card-text>
@@ -69,5 +88,10 @@ export default {
   border-spacing: 0 8px;
   margin-top: -10px;
   width: 100%;
+}
+.mountpoints-horiz-table {
+  width: 100%;
+  border-style: none;
+  border-spacing: 0px;
 }
 </style>

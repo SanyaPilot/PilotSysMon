@@ -2,7 +2,7 @@
   <div>
     <panel-header>CPU info</panel-header>
     <v-row>
-      <v-col cols=12 sm=6 md=3>
+      <v-col cols=12 sm=6 lg=3>
         <v-row>
           <v-col cols=12>
             <v-card hover>
@@ -42,9 +42,9 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols=12 sm=6 md=9>
+      <v-col cols=12 sm=6 lg=9>
         <v-row>
-          <v-col cols=12 md=6>
+          <v-col cols=12 lg=6>
             <v-card hover>
               <v-card-title class="justify-space-between">
                 CPU load chart
@@ -56,7 +56,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col cols=12 md=6>
+          <v-col cols=12 lg=6>
             <v-card hover>
               <v-card-title class="justify-space-between">
                 CPU frequency chart

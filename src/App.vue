@@ -6,7 +6,7 @@
       clipped-left
     >
       <v-app-bar-nav-icon
-        @click="drawer.expanded = !drawer.expanded"
+        @click="triggerDrawer()"
       ></v-app-bar-nav-icon>
       <v-toolbar-title>PilotSysMon</v-toolbar-title>
     </v-app-bar>
@@ -14,7 +14,7 @@
     <v-navigation-drawer
       app
       clipped
-      permanent
+      v-model="drawer.shown"
       :mini-variant="!drawer.expanded"
     >
       <v-list
@@ -61,6 +61,7 @@ export default {
     count: 0,
     drawer: {
       expanded: true,
+      shown: false,
       selectedItem: 0,
       items: [
         { text: 'System Info', icon: 'mdi-folder', view: 'sysinfo' },
@@ -78,12 +79,20 @@ export default {
     },
     getSelectedItem() {
       this.drawer.selectedItem = this.drawer.items.findIndex(e => e.view == this.$route.name)
+    },
+    triggerDrawer() {
+      if (this.$vuetify.breakpoint.mobile) {
+        this.drawer.shown = !this.drawer.shown
+      } else {
+        this.drawer.expanded = !this.drawer.expanded
+      }
     }
   },
   created () {
     this.getSelectedItem()
   },
   mounted () {
+    this.drawer.shown = this.$vuetify.breakpoint.mobile ? false : true
     console.log(this.$vuetify.breakpoint)
     console.log(this.$vuetify)
   }

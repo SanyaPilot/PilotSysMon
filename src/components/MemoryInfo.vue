@@ -2,9 +2,9 @@
   <div>
     <panel-header>System memory info</panel-header>
     <v-row>
-      <v-col cols=12 md=4>
+      <v-col cols=12 lg=4>
         <v-row>
-          <v-col cols=12>
+          <v-col xs=12 md=6 lg=12>
             <v-card hover>
               <v-card-title>RAM Load</v-card-title>
               <v-card-text class="d-flex justify-space-between">
@@ -27,7 +27,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col cols=12 v-if="swapInfo">
+          <v-col xs=12 md=6 lg=12 v-if="swapInfo">
             <v-card hover>
               <v-card-title>Swap Load</v-card-title>
               <v-card-text class="d-flex justify-space-between">
@@ -52,7 +52,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols=12 md=8>
+      <v-col cols=12 lg=8>
         <v-row>
           <v-col cols=12>
             <v-card hover>

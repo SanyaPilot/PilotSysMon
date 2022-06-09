@@ -2,7 +2,7 @@
   <div>
     <panel-header>About system</panel-header>
     <v-row>
-      <v-col cols=12 md=4 v-for="(card, name) in cards" :key="name">
+      <v-col cols=12 md=6 lg=4 v-for="(card, name) in cards" :key="name">
         <v-card hover>
           <v-card-title class="title-img">
             {{card.label}}
@@ -162,5 +162,6 @@ export default {
 }
 .table-value {
   text-align: right;
+  overflow-wrap: anywhere;
 }
 </style>

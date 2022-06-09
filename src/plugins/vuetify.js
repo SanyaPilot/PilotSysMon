@@ -17,9 +17,7 @@ export default new Vuetify({
       iconfont: 'mdiSvg',
     },
     breakpoint: {
-      thresholds: {
-        sm: 1050,
-      },
+      mobileBreakpoint: 960 // This is equivalent to a value of 960
     },
   },
 });
