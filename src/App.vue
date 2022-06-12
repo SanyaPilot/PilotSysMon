@@ -8,7 +8,9 @@
       <v-app-bar-nav-icon
         @click="triggerDrawer()"
       ></v-app-bar-nav-icon>
-      <v-toolbar-title>PilotSysMon</v-toolbar-title>
+      <v-scroll-x-reverse-transition origin="center center">
+        <v-toolbar-title v-show="titleShown">{{ headers[drawer.selectedItem] }}</v-toolbar-title>
+      </v-scroll-x-reverse-transition>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -22,7 +24,7 @@
         dense
       >
         <v-list-item-group
-          v-model="drawer.selectedItem"
+          v-model="drawer.tempSelectedItem"
           color="primary"
           mandatory
         >
@@ -54,6 +56,8 @@
 </template>
 
 <script>
+import { getHostname } from './API/network.js'
+
 export default {
   name: 'App',
 
@@ -63,6 +67,7 @@ export default {
       expanded: true,
       shown: false,
       selectedItem: 0,
+      tempSelectedItem: 0,
       items: [
         { text: 'System Info', icon: 'mdi-folder', view: 'sysinfo' },
         { text: 'CPU', icon: 'mdi-cpu-64-bit', view: 'cpu' },
@@ -72,13 +77,34 @@ export default {
         { text: 'Logs', icon: 'mdi-bug', view: 'logs' }
       ]
     },
+    headers: [
+      'About System',
+      'CPU info',
+      'Storage devices info',
+      'System memory info',
+      null,
+      'System logs'
+    ],
+    titleShown: false
   }),
   methods: {
     changeMainView(view) {
+      this.titleShown = false
+      console.log(this.titleShown)
       this.$router.push(view)
+      let context = this
+      //setTimeout(function() {
+      //
+      //}, 1000)
+      setTimeout(function() {
+        context.drawer.selectedItem = context.drawer.tempSelectedItem
+        context.titleShown = true
+      }, 400)
+      console.log(this.titleShown)
     },
     getSelectedItem() {
       this.drawer.selectedItem = this.drawer.items.findIndex(e => e.view == this.$route.name)
+      this.drawer.tempSelectedItem = this.drawer.selectedItem
     },
     triggerDrawer() {
       if (this.$vuetify.breakpoint.mobile) {
@@ -88,13 +114,15 @@ export default {
       }
     }
   },
-  created () {
+  async created () {
     this.getSelectedItem()
+    this.headers[4] = await getHostname() + ' Interfaces info'
   },
   mounted () {
     this.drawer.shown = this.$vuetify.breakpoint.mobile ? false : true
     console.log(this.$vuetify.breakpoint)
     console.log(this.$vuetify)
+    this.titleShown = true
   }
 };
 </script>

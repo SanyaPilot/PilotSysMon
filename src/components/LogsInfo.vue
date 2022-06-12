@@ -1,6 +1,5 @@
 <template>
   <div>
-    <panel-header>System logs</panel-header>
     <v-row>
       <v-col cols=12 md=3 class="py-1">
         <v-select
@@ -144,14 +143,9 @@
 
 <script>
 import getLogsData from '../API/logs.js'
-import PanelHeader from './import/PanelHeader.vue'
 
 export default {
   name: 'LogsInfo',
-
-  components: {
-    PanelHeader
-  },
 
   data: () => ({
     logdata: {},

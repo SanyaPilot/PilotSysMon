@@ -1,6 +1,5 @@
 <template>
   <div>
-    <panel-header>CPU info</panel-header>
     <v-row>
       <v-col cols=12 sm=6 lg=3>
         <v-row>
@@ -81,7 +80,6 @@
 //import { mdiWifiStrength3, mdiLanPending, mdiClockOutline, mdiServer } from '@mdi/js'
 import LineChart from '../charts/lineChart.js'
 import CPUDetails from './import/CPUDetails.vue'
-import PanelHeader from './import/PanelHeader.vue'
 import { getCPUSummaryData, getCPUInfoData } from '../API/cpu.js'
 
 let updateTimer
@@ -91,8 +89,7 @@ export default {
 
   components: {
     LineChart,
-    CPUDetails,
-    PanelHeader
+    CPUDetails
   },
 
   data: () => ({

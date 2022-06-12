@@ -1,6 +1,5 @@
 <template>
   <div>
-    <panel-header>System memory info</panel-header>
     <v-row>
       <v-col cols=12 lg=4>
         <v-row>
@@ -87,7 +86,6 @@
 <script>
 import getMemoryData from '../API/memory.js'
 import LineChart from '../charts/lineChart.js'
-import PanelHeader from './import/PanelHeader.vue'
 
 let updateTimer
 
@@ -95,8 +93,7 @@ export default {
   name: 'MemoryInfo',
 
   components: {
-    LineChart,
-    PanelHeader
+    LineChart
   },
 
   data: () => ({

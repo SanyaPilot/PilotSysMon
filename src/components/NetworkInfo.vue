@@ -1,6 +1,5 @@
 <template>
   <div>
-    <panel-header>{{ hostname }} Interfaces info</panel-header>
     <v-row v-for="(iface, name) in ifaces" :key="name">
       <v-col cols=12 md=4>
         <v-card hover>
@@ -38,7 +37,6 @@
 <script>
 //import { getInterfaceAddressesData, getHostname, getActiveInterface } from '../API/network.js'
 import { getInterfaceAddressesData, startMeasuring, stopMeasuring, getMeasuringResults, getHostname } from '../API/network.js'
-import PanelHeader from './import/PanelHeader.vue'
 import LineChart from '../charts/lineChart.js'
 import colors from 'vuetify/lib/util/colors'
 
@@ -48,8 +46,7 @@ export default {
   name: 'NetworkInfo',
 
   components: {
-    LineChart,
-    PanelHeader
+    LineChart
   },
 
   data: () => ({

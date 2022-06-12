@@ -1,6 +1,5 @@
 <template>
   <div>
-    <panel-header>Storage devices info</panel-header>
     <v-row>
       <v-col cols=12>
         <v-card hover>
@@ -51,13 +50,8 @@
 
 <script>
 import getDisksData from '../API/disks.js'
-import PanelHeader from './import/PanelHeader.vue'
 export default {
   name: 'DisksInfo',
-
-  components: {
-    PanelHeader
-  },
 
   data: () => ({
       mountpoints: {

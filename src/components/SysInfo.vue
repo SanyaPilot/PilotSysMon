@@ -1,6 +1,5 @@
 <template>
   <div>
-    <panel-header>About system</panel-header>
     <v-row>
       <v-col cols=12 md=6 lg=4 v-for="(card, name) in cards" :key="name">
         <v-card hover>
@@ -39,14 +38,8 @@ import { getInterfaceAddressesData, getActiveInterface, getHostname } from '../A
 import getTimeData from '../API/time.js'
 import getPythonData from '../API/python.js'
 
-import PanelHeader from './import/PanelHeader.vue'
-
 export default {
   name: 'SysInfo',
-
-  components: {
-    PanelHeader
-  },
 
   data: () => ({
     cards: {
