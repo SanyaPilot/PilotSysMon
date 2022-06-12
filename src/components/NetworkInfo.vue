@@ -2,7 +2,10 @@
   <div>
     <v-row v-for="(iface, name) in ifaces" :key="name">
       <v-col cols=12 md=4>
-        <v-card hover>
+        <v-card
+          :hover="!$vuetify.breakpoint.mobile"
+          :outlined="$vuetify.breakpoint.mobile"
+        >
           <v-card-title>{{ name }} Info</v-card-title>
           <v-card-text class="pb-0">
             <div v-for="(data, name) in iface" :key="name" class="pb-4">
@@ -21,7 +24,10 @@
         </v-card>
       </v-col>
       <v-col cols=12 md=8>
-        <v-card hover>
+        <v-card
+          :hover="!$vuetify.breakpoint.mobile"
+          :outlined="$vuetify.breakpoint.mobile"
+        >
           <v-card-title>{{ name }} Bandwidth</v-card-title>
           <v-card-text>
             <div>

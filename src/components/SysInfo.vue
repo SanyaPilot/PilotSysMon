@@ -2,7 +2,10 @@
   <div>
     <v-row>
       <v-col cols=12 md=6 lg=4 v-for="(card, name) in cards" :key="name">
-        <v-card hover>
+        <v-card
+          :hover="!$vuetify.breakpoint.mobile"
+          :outlined="$vuetify.breakpoint.mobile"
+        >
           <v-card-title class="title-img">
             {{card.label}}
             <v-img

@@ -2,7 +2,10 @@
   <div>
     <v-row>
       <v-col cols=12>
-        <v-card hover>
+        <v-card
+          :hover="!$vuetify.breakpoint.mobile"
+          :outlined="$vuetify.breakpoint.mobile"
+        >
           <v-card-title class=pb-2>Mountpoints</v-card-title>
           <v-card-text>
             <table class="mountpoints-table" v-if="this.$vuetify.breakpoint.mdAndUp">

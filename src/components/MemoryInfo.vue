@@ -4,7 +4,10 @@
       <v-col cols=12 lg=4>
         <v-row>
           <v-col xs=12 md=6 lg=12>
-            <v-card hover>
+            <v-card
+              :hover="!$vuetify.breakpoint.mobile"
+              :outlined="$vuetify.breakpoint.mobile"
+            >
               <v-card-title>RAM Load</v-card-title>
               <v-card-text class="d-flex justify-space-between">
                 <v-progress-circular
@@ -27,7 +30,10 @@
             </v-card>
           </v-col>
           <v-col xs=12 md=6 lg=12 v-if="swapInfo">
-            <v-card hover>
+            <v-card
+              :hover="!$vuetify.breakpoint.mobile"
+              :outlined="$vuetify.breakpoint.mobile"
+            >
               <v-card-title>Swap Load</v-card-title>
               <v-card-text class="d-flex justify-space-between">
                 <v-progress-circular
@@ -54,7 +60,10 @@
       <v-col cols=12 lg=8>
         <v-row>
           <v-col cols=12>
-            <v-card hover>
+            <v-card
+              :hover="!$vuetify.breakpoint.mobile"
+              :outlined="$vuetify.breakpoint.mobile"
+            >
               <v-card-title>
                 RAM load chart
               </v-card-title>
@@ -66,7 +75,10 @@
             </v-card>
           </v-col>
           <v-col cols=12 v-if="swapInfo">
-            <v-card hover>
+            <v-card
+              :hover="!$vuetify.breakpoint.mobile"
+              :outlined="$vuetify.breakpoint.mobile"
+            >
               <v-card-title>
                 Swap load chart
               </v-card-title>

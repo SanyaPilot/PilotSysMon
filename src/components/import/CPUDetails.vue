@@ -1,5 +1,8 @@
 <template>
-  <v-card hover>
+  <v-card
+    :hover="!$vuetify.breakpoint.mobile"
+    :outlined="$vuetify.breakpoint.mobile"
+  >
     <v-card-title class="justify-space-between">
       CPU details
     </v-card-title>
