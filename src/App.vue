@@ -46,11 +46,13 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-container fluid>
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-      </v-container>
+      <v-scroll-x-reverse-transition>
+        <v-container fluid v-show="mainViewShown">
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
+        </v-container>
+      </v-scroll-x-reverse-transition>
     </v-main>
   </v-app>
 </template>
@@ -85,22 +87,24 @@ export default {
       null,
       'System logs'
     ],
-    titleShown: false
+    titleShown: false,
+    mainViewShown: false
   }),
   methods: {
     changeMainView(view) {
       this.titleShown = false
-      console.log(this.titleShown)
-      this.$router.push(view)
-      let context = this
-      //setTimeout(function() {
-      //
-      //}, 1000)
+      this.mainViewShown = false
+
       setTimeout(function() {
-        context.drawer.selectedItem = context.drawer.tempSelectedItem
-        context.titleShown = true
-      }, 400)
-      console.log(this.titleShown)
+        this.mainViewShown = true
+        this.$router.push(view)
+        console.log(view)
+      }.bind(this), 400)
+
+      setTimeout(function() {
+        this.drawer.selectedItem = this.drawer.tempSelectedItem
+        this.titleShown = true
+      }.bind(this), 400)
     },
     getSelectedItem() {
       this.drawer.selectedItem = this.drawer.items.findIndex(e => e.view == this.$route.name)
@@ -123,6 +127,7 @@ export default {
     console.log(this.$vuetify.breakpoint)
     console.log(this.$vuetify)
     this.titleShown = true
+    this.mainViewShown = true
   }
 };
 </script>

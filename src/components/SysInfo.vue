@@ -5,6 +5,8 @@
         <v-card
           :hover="!$vuetify.breakpoint.mobile"
           :outlined="$vuetify.breakpoint.mobile"
+          class="d-flex flex-wrap"
+          style="height: 100%;"
         >
           <v-card-title class="title-img">
             {{card.label}}
@@ -40,6 +42,8 @@ import getMemoryData from '../API/memory.js'
 import { getInterfaceAddressesData, getActiveInterface, getHostname } from '../API/network.js'
 import getTimeData from '../API/time.js'
 import getPythonData from '../API/python.js'
+
+let updateTimer
 
 export default {
   name: 'SysInfo',
@@ -144,12 +148,24 @@ export default {
     await this.updateTimeData()
     await this.updatePythonData()
   },
+  async activated() {
+    updateTimer = setInterval(async function() {
+      await this.updateHardwareData()
+      await this.updateNetworkData()
+      await this.updateTimeData()
+    }.bind(this), 3000)
+  },
+  deactivated() {
+    clearInterval(updateTimer)
+  },
 };
 </script>
 
 <style>
 .title-img {
   justify-content: space-between;
+  width: 100%;
+  height: fit-content;
 }
 .data-table {
   border-spacing: 0px;
