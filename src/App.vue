@@ -63,33 +63,35 @@ import { getHostname } from './API/network.js'
 export default {
   name: 'App',
 
-  data: () => ({
-    count: 0,
-    drawer: {
-      expanded: true,
-      shown: false,
-      selectedItem: 0,
-      tempSelectedItem: 0,
-      items: [
-        { text: 'System Info', icon: 'mdi-folder', view: 'sysinfo' },
-        { text: 'CPU', icon: 'mdi-cpu-64-bit', view: 'cpu' },
-        { text: 'Disks', icon: 'mdi-database', view: 'disks'},
-        { text: 'Memory', icon: 'mdi-memory', view: 'memory' },
-        { text: 'Network', icon: 'mdi-server-network', view: 'network' },
-        { text: 'Logs', icon: 'mdi-bug', view: 'logs' }
-      ]
-    },
-    headers: [
-      'About System',
-      'CPU info',
-      'Storage devices info',
-      'System memory info',
-      null,
-      'System logs'
-    ],
-    titleShown: false,
-    mainViewShown: false
-  }),
+  data: function() {
+    return {
+      count: 0,
+      drawer: {
+        expanded: true,
+        shown: false,
+        selectedItem: 0,
+        tempSelectedItem: 0,
+        items: [
+          { text: this.$t('ui.items.system'), icon: 'mdi-folder', view: 'sysinfo' },
+          { text: this.$t('ui.items.cpu'), icon: 'mdi-cpu-64-bit', view: 'cpu' },
+          { text: this.$t('ui.items.disks'), icon: 'mdi-database', view: 'disks'},
+          { text: this.$t('ui.items.memory'), icon: 'mdi-memory', view: 'memory' },
+          { text: this.$t('ui.items.network'), icon: 'mdi-server-network', view: 'network' },
+          { text: this.$t('ui.items.logs'), icon: 'mdi-bug', view: 'logs' }
+        ]
+      },
+      headers: [
+        this.$t('ui.headers.system'),
+        this.$t('ui.headers.cpu'),
+        this.$t('ui.headers.disks'),
+        this.$t('ui.headers.memory'),
+        null,
+        this.$t('ui.headers.logs')
+      ],
+      titleShown: false,
+      mainViewShown: false
+    }
+  },
   methods: {
     changeMainView(view) {
       this.titleShown = false
@@ -120,7 +122,7 @@ export default {
   },
   async created () {
     this.getSelectedItem()
-    this.headers[4] = await getHostname() + ' Interfaces info'
+    this.headers[4] = this.$t('ui.headers.network', [await getHostname()])
   },
   mounted () {
     this.drawer.shown = this.$vuetify.breakpoint.mobile ? false : true

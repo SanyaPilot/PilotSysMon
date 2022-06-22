@@ -48,15 +48,17 @@ let updateTimer
 export default {
   name: 'SysInfo',
 
-  data: () => ({
-    cards: {
-      os: {label: "OS", iconType: "svg", icon: "os", data: null},
-      hardware: {label: "Hardware", iconType: "icon", icon: mdiServer, data: null},
-      network: {label: "Network", iconType: "icon", icon: "network", data: null},
-      time: {label: "Time", iconType: "icon", icon: mdiClockOutline, data: null},
-      python: {label: "Python", iconType: "svg", icon: require('../assets/python.svg'), data: null},
-    },
-  }),
+  data: function() {
+    return {
+      cards: {
+        os: {label: this.$t('sysinfo.os.header'), iconType: "svg", icon: "os", data: null},
+        hardware: {label: this.$t('sysinfo.hardware.header'), iconType: "icon", icon: mdiServer, data: null},
+        network: {label: this.$t('sysinfo.network.header'), iconType: "icon", icon: "network", data: null},
+        time: {label: this.$t('sysinfo.time.header'), iconType: "icon", icon: mdiClockOutline, data: null},
+        python: {label: this.$t('common.python'), iconType: "svg", icon: require('../assets/python.svg'), data: null},
+      },
+    }
+  },
   computed: {
     getNetworkIcon: function() {
       return this.cards.network.data[0].value.includes('Ethernet') ? mdiLanPending : mdiWifiStrength3
@@ -79,15 +81,15 @@ export default {
       switch (data.family){
         case "Linux":
           payload = [
-            {name: "Family:", value: data.family},
-            {name: "Name:", value: data.name}
+            {name: this.$t('sysinfo.os.family'), value: data.family},
+            {name: this.$t('sysinfo.os.name'), value: data.name}
           ]
           if (data.version){
-            payload.push({name: "Version:", value: data.version})
+            payload.push({name: this.$t('sysinfo.os.version'), value: data.version})
           }
-          payload.push({name: "Kernel:", value: data.release})
+          payload.push({name: this.$t('sysinfo.os.kernel'), value: data.release})
           if (data.url){
-            payload.push({name: "URL:", value: data.url})
+            payload.push({name: this.$t('sysinfo.os.url'), value: data.url})
           }
           break
       }
@@ -100,9 +102,9 @@ export default {
       const ram = memory.ram
       const swap = memory.swap
       this.cards.hardware.data = [
-        {name: "CPU:", value: cpu.name + " (" + cpu.cpus.count + ") @ " + cpu.freq.max + "MHz"},
-        {name: "Memory:", value: ram.used + " / " + ram.total},
-        {name: "Swap:", value: swap.used + " / " + swap.total},
+        {name: this.$t('sysinfo.hardware.cpu'), value: cpu.name + " (" + cpu.cpus.count + ") @ " + cpu.freq.max + "MHz"},
+        {name: this.$t('sysinfo.hardware.ram'), value: ram.used + " / " + ram.total},
+        {name: this.$t('sysinfo.hardware.swap'), value: swap.used + " / " + swap.total},
       ]
     },
     async updateNetworkData() {
@@ -111,11 +113,11 @@ export default {
       const addresses = Object.getOwnPropertyDescriptor(data, activeIface.name).value
       const hostname = await getHostname()
       this.cards.network.data = [
-        {name: "Interface:", value: activeIface.name +
-        " (" + (activeIface.type == "wifi" ? "WiFi" : "Ethernet") + ")"},
-        {name: "Hostname:", value: hostname},
-        {name: "IPv4:", value: addresses.v4.address},
-        {name: "IPv6:", value: addresses.v6 ? addresses.v6.address : "Not used"},
+        {name: this.$t('sysinfo.network.iface'), value: activeIface.name +
+        " (" + (activeIface.type == "wifi" ? this.$t('sysinfo.network.wifi') : this.$t('sysinfo.network.eth')) + ")"},
+        {name: this.$t('sysinfo.network.hostname'), value: hostname},
+        {name: this.$t('common.ipv4'), value: addresses.v4.address},
+        {name: this.$t('common.ipv6'), value: addresses.v6 ? addresses.v6.address : "Not used"},
       ]
     },
     async updateTimeData() {
@@ -124,9 +126,9 @@ export default {
       const day = d.getUTCDate()
       console.log(data);
       this.cards.time.data = [
-        {name: "Time on server:", value: new Date(data.time * 1000).toLocaleTimeString('ru-RU', {timeZone: 'UTC'})},
-        {name: "Server timezone:", value: data.timezone},
-        {name: "Uptime:", value: (day - 1) + (day == 1 ? " day" : " days") +
+        {name: this.$t('sysinfo.time.serverTime'), value: new Date(data.time * 1000).toLocaleTimeString('ru-RU', {timeZone: 'UTC'})},
+        {name: this.$t('sysinfo.time.serverTZ'), value: data.timezone},
+        {name: this.$t('sysinfo.time.uptime'), value: (day - 1) + (day == 1 ? " day" : " days") +
                           ", " + d.getUTCHours() + ":" + d.getUTCMinutes() +
                           ":" + d.getUTCSeconds()},
       ]
@@ -134,9 +136,9 @@ export default {
     async updatePythonData() {
       const python = await getPythonData()
       this.cards.python.data = [
-        {name: "Implementation:", value: python.implementation},
-        {name: "Version:", value: python.version},
-        {name: "Venv:", value: python.venv_path ? python.venv_path : "Not used"},
+        {name: this.$t('sysinfo.python.implementation'), value: python.implementation},
+        {name: this.$t('common.version'), value: python.version},
+        {name: this.$t('sysinfo.python.venv'), value: python.venv_path ? python.venv_path : "Not used"},
       ]
     }
   },

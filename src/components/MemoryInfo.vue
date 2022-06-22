@@ -8,7 +8,7 @@
               :hover="!$vuetify.breakpoint.mobile"
               :outlined="$vuetify.breakpoint.mobile"
             >
-              <v-card-title>RAM Load</v-card-title>
+              <v-card-title>{{ $t('memoryinfo.ram') }}</v-card-title>
               <v-card-text class="d-flex justify-space-between">
                 <v-progress-circular
                   size=300
@@ -34,7 +34,7 @@
               :hover="!$vuetify.breakpoint.mobile"
               :outlined="$vuetify.breakpoint.mobile"
             >
-              <v-card-title>Swap Load</v-card-title>
+              <v-card-title>{{ $t('memoryinfo.swap') }}</v-card-title>
               <v-card-text class="d-flex justify-space-between">
                 <v-progress-circular
                   size=300
@@ -65,7 +65,7 @@
               :outlined="$vuetify.breakpoint.mobile"
             >
               <v-card-title>
-                RAM load chart
+                {{ $t('memoryinfo.ramChart') }}
               </v-card-title>
               <v-card-text>
                 <div v-if="ramChart.datacollection">
@@ -80,7 +80,7 @@
               :outlined="$vuetify.breakpoint.mobile"
             >
               <v-card-title>
-                Swap load chart
+                {{ $t('memoryinfo.swapChart') }}
               </v-card-title>
               <v-card-text>
                 <div v-if="swapChart.datacollection">
@@ -108,76 +108,78 @@ export default {
     LineChart
   },
 
-  data: () => ({
-    ramInfo: {},
-    swapInfo: null,
-    ram: {
-      usages: [],
-      percents: [],
-      timestamps: []
-    },
-    swap: {
-      usages: [],
-      percents: [],
-      timestamps: []
-    },
-    ramChart: {
-      datacollection: null,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
+  data: function() {
+    return {
+      ramInfo: {},
+      swapInfo: null,
+      ram: {
+        usages: [],
+        percents: [],
+        timestamps: []
+      },
+      swap: {
+        usages: [],
+        percents: [],
+        timestamps: []
+      },
+      ramChart: {
+        datacollection: null,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            xAxes: [{
               display: true,
-              labelString: 'Time'
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
+              scaleLabel: {
+                display: true,
+                labelString: this.$t('common.time')
+              }
+            }],
+            yAxes: [{
               display: true,
-              labelString: 'RAM Used '
-            },
-            ticks: {
-              min: 0,
-              max: null,
-              callback: null
-            }
-          }]
+              scaleLabel: {
+                display: true,
+                labelString: this.$t('memoryinfo.ramChartAxis')
+              },
+              ticks: {
+                min: 0,
+                max: null,
+                callback: null
+              }
+            }]
+          }
         }
-      }
-    },
-    swapChart: {
-      datacollection: null,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
+      },
+      swapChart: {
+        datacollection: null,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            xAxes: [{
               display: true,
-              labelString: 'Time'
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
+              scaleLabel: {
+                display: true,
+                labelString: this.$t('common.time')
+              }
+            }],
+            yAxes: [{
               display: true,
-              labelString: 'Swap Used '
-            },
-            ticks: {
-              min: 0,
-              max: null,
-              callback: null
-            }
-          }]
+              scaleLabel: {
+                display: true,
+                labelString: this.$t('memoryinfo.swapChartAxis')
+              },
+              ticks: {
+                min: 0,
+                max: null,
+                callback: null
+              }
+            }]
+          }
         }
       }
     }
-  }),
+  },
   async created() {
     await this.updateData()
     this.updateRAMChart()
@@ -245,7 +247,7 @@ export default {
         labels: timestamps,
         datasets: [
           {
-            label: 'RAM Load',
+            label: this.$t('memoryinfo.ram'),
             fill: false,
             tension: 0.1,
             pointBackgroundColor: this.$vuetify.theme.themes.light.primary,
@@ -267,7 +269,7 @@ export default {
         labels: timestamps,
         datasets: [
           {
-            label: 'Swap Load',
+            label: this.$t('memoryinfo.swap'),
             fill: false,
             tension: 0.1,
             pointBackgroundColor: this.$vuetify.theme.themes.light.primary,

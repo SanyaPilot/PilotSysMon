@@ -6,7 +6,7 @@
           :hover="!$vuetify.breakpoint.mobile"
           :outlined="$vuetify.breakpoint.mobile"
         >
-          <v-card-title>{{ name }} Info</v-card-title>
+          <v-card-title>{{ $t('networkinfo.ifaceCardTitle', [name]) }}</v-card-title>
           <v-card-text class="pb-0">
             <div v-for="(data, name) in iface" :key="name" class="pb-4">
               <div class="text-subtitle-1">
@@ -28,7 +28,7 @@
           :hover="!$vuetify.breakpoint.mobile"
           :outlined="$vuetify.breakpoint.mobile"
         >
-          <v-card-title>{{ name }} Bandwidth</v-card-title>
+          <v-card-title>{{ $t('networkinfo.bandwidthCardTitle', [name]) }}</v-card-title>
           <v-card-text>
             <div>
               <line-chart style="height:286px;" :chart-data="charts[name]" :options="chartOptions"></line-chart>
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-//import { getInterfaceAddressesData, getHostname, getActiveInterface } from '../API/network.js'
 import { getInterfaceAddressesData, startMeasuring, stopMeasuring, getMeasuringResults, getHostname } from '../API/network.js'
 import LineChart from '../charts/lineChart.js'
 import colors from 'vuetify/lib/util/colors'
@@ -55,42 +54,44 @@ export default {
     LineChart
   },
 
-  data: () => ({
-    hostname: null,
-    ifaces: null,
-    charts: {
-      lo: {}
-    },
-    usages: {},
-    timestamps: [],
-    chartOptions: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        xAxes: [{
-          display: true,
-          scaleLabel: {
+  data: function() {
+    return {
+      hostname: null,
+      ifaces: null,
+      charts: {
+        lo: {}
+      },
+      usages: {},
+      timestamps: [],
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [{
             display: true,
-            labelString: 'Time'
-          }
-        }],
-        yAxes: [{
-          display: true,
-          scaleLabel: {
-            display: true,
-            labelString: 'Bandwidth'
-          },
-          ticks: {
-            min: 0,
-            suggestedMax: null,
-            callback: value => {
-              return value + ' MiB/s'
+            scaleLabel: {
+              display: true,
+              labelString: this.$t('common.time')
             }
-          }
-        }]
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: this.$t('networkinfo.bandwidth')
+            },
+            ticks: {
+              min: 0,
+              suggestedMax: null,
+              callback: value => {
+                return value + ' MiB/s'
+              }
+            }
+          }]
+        }
       }
     }
-  }),
+  },
   async created() {
     await this.getIfacesInfo()
     this.hostname = await getHostname()
@@ -122,20 +123,18 @@ export default {
       for (const [ifaceName, data] of Object.entries(info)) {
         this.ifaces[ifaceName] = {}
         if (data.v4) {
-          this.ifaces[ifaceName].IPv4 = {
-            'Address': data.v4.address,
-            'Netmask': data.v4.netmask,
-            'Broadcast': data.v4.broadcast,
-          }
+          this.ifaces[ifaceName][this.$t('common.ipv4')] = {}
+          this.ifaces[ifaceName][this.$t('common.ipv4')][this.$t('networkinfo.address')] = data.v4.address
+          this.ifaces[ifaceName][this.$t('common.ipv4')][this.$t('networkinfo.netmask')] = data.v4.netmask
+          this.ifaces[ifaceName][this.$t('common.ipv4')][this.$t('networkinfo.broadcast')] = data.v4.broadcast
         }
         if (data.v6) {
-          this.ifaces[ifaceName].IPv6 = {
-            'Address': data.v6.address,
-            'Netmask': data.v6.netmask,
-            'Broadcast': data.v6.broadcast,
-          }
+          this.ifaces[ifaceName][this.$t('common.ipv6')] = {}
+          this.ifaces[ifaceName][this.$t('common.ipv6')][this.$t('networkinfo.address')] = data.v6.address
+          this.ifaces[ifaceName][this.$t('common.ipv6')][this.$t('networkinfo.netmask')] = data.v6.netmask
+          this.ifaces[ifaceName][this.$t('common.ipv6')][this.$t('networkinfo.broadcast')] = data.v6.broadcast
         }
-        this.ifaces[ifaceName].MAC = data.mac
+        this.ifaces[ifaceName][this.$t('common.mac')] = data.mac
       }
     },
     async updateUsagesData() {
@@ -173,7 +172,7 @@ export default {
           labels: timestamps,
           datasets: [
             {
-              label: 'Download',
+              label: this.$t('networkinfo.download'),
               fill: false,
               tension: 0.1,
               pointBackgroundColor: this.$vuetify.theme.themes.light.primary,
@@ -181,7 +180,7 @@ export default {
               data: data.download
             },
             {
-              label: 'Upload',
+              label: this.$t('networkinfo.upload'),
               fill: false,
               tension: 0.1,
               pointBackgroundColor: colors.red.darken1,

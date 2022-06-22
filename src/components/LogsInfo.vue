@@ -3,8 +3,8 @@
     <v-row>
       <v-col cols=12 md=3 class="py-1">
         <v-select
-          label="Priority"
-          hint="Messages with this priority will be displayed"
+          :label="$t('logsinfo.priority.label')"
+          :hint="$t('logsinfo.priority.hint')"
           v-model="loglevel"
           :items="loglevels"
           @change="updateLogs()"
@@ -15,8 +15,8 @@
       </v-col>
       <v-col cols=12 md=3 class="py-1">
         <v-text-field
-          label="Identfier"
-          hint="Logs with this ID will be displayed"
+          :label="$t('logsinfo.identifier.label')"
+          :hint="$t('logsinfo.identifier.hint')"
           v-model="id"
           :disabled="loading"
           @change="updateLogs()"
@@ -25,8 +25,8 @@
       </v-col>
       <v-col cols=12 md=2 class="py-1">
         <v-text-field
-          label="Boot ID"
-          hint="Logs of this boot will be displayed"
+          :label="$t('logsinfo.bootID.label')"
+          :hint="$t('logsinfo.priority.hint')"
           v-model="boot"
           :rules="validateNumberRule"
           :disabled="loading"
@@ -147,22 +147,28 @@ import getLogsData from '../API/logs.js'
 export default {
   name: 'LogsInfo',
 
-  data: () => ({
-    logdata: {},
-    paginatedLogs: [],
-    pageCount: null,
-    page: 1,
-    loglevels: [{text: 'Emergency', value: 'emerg'}, {text: 'Alert and above', value: 'alert'},
-                {text: 'Critical and above', value: 'crit'}, {text: 'Error and above', value: 'error'},
-                {text: 'Warning and above', value: 'warn'}, {text: 'Notice and above', value: 'notice'},
-                {text: 'Info and above', value: 'info'}, {text: 'Debug and above', value: 'debug'}],
-    loglevel: 'error',
-    id: null,
-    boot: 0,
-    date: null,
-    validateNumberRule: [value => Number.isInteger(parseInt(value)) || 'Must be a number!'],
-    loading: false
-  }),
+  data: function() {
+    return {
+      logdata: {},
+      paginatedLogs: [],
+      pageCount: null,
+      page: 1,
+      loglevels: [{text: this.$t('logsinfo.priority.values.emerg'), value: 'emerg'},
+                  {text: this.$t('logsinfo.priority.values.alert'), value: 'alert'},
+                  {text: this.$t('logsinfo.priority.values.crit'), value: 'crit'},
+                  {text: this.$t('logsinfo.priority.values.error'), value: 'error'},
+                  {text: this.$t('logsinfo.priority.values.warn'), value: 'warn'},
+                  {text: this.$t('logsinfo.priority.values.notice'), value: 'notice'},
+                  {text: this.$t('logsinfo.priority.values.info'), value: 'info'},
+                  {text: this.$t('logsinfo.priority.values.debug'), value: 'debug'}],
+      loglevel: 'error',
+      id: null,
+      boot: 0,
+      date: null,
+      validateNumberRule: [value => Number.isInteger(parseInt(value)) || this.$t('logsinfo.bootID.validError')],
+      loading: false
+    }
+  },
   async created() {
     await this.updateLogs()
   },

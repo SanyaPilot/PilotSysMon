@@ -6,7 +6,7 @@
           :hover="!$vuetify.breakpoint.mobile"
           :outlined="$vuetify.breakpoint.mobile"
         >
-          <v-card-title class=pb-2>Mountpoints</v-card-title>
+          <v-card-title class=pb-2>{{ $t('disksinfo.header') }}</v-card-title>
           <v-card-text>
             <table class="mountpoints-table" v-if="this.$vuetify.breakpoint.mdAndUp">
               <colgroup>
@@ -56,13 +56,16 @@ import getDisksData from '../API/disks.js'
 export default {
   name: 'DisksInfo',
 
-  data: () => ({
-      mountpoints: {
-        header: ['Device', 'Mountpoint', 'Type', 'Options', 'Usage'],
-        data: []
-      },
-      usages: {}
-  }),
+  data: function() {
+    return {
+        mountpoints: {
+          data: [],
+          header: [this.$t('disksinfo.device'), this.$t('disksinfo.mountpoint'),
+          this.$t('disksinfo.type'), this.$t('disksinfo.options'), this.$t('disksinfo.usage')],
+        },
+        usages: {}
+      }
+  },
   async created() {
     await this.getMountpoints()
   },

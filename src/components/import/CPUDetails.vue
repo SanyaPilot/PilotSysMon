@@ -4,7 +4,7 @@
     :outlined="$vuetify.breakpoint.mobile"
   >
     <v-card-title class="justify-space-between">
-      CPU details
+      {{ $t('cpuinfo.details') }}
     </v-card-title>
     <v-card-text>
       <table class="data-table">

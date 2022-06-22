@@ -1,0 +1,125 @@
+{
+  "common": {
+    "ipv4": "IPv4",
+    "ipv6": "IPv6",
+    "mac": "MAC",
+    "python": "Python",
+    "version": "Version",
+    "time": "Time",
+    "date": "Date",
+    "reset": "Reset"
+  },
+  "ui": {
+    "headers": {
+      "system": "About system",
+      "cpu": "CPU info",
+      "disks": "Storage devices info",
+      "memory": "System memory info",
+      "network": "{0} Interfaces info",
+      "logs": "System logs"
+    },
+    "items": {
+      "system": "System info",
+      "cpu": "CPU",
+      "disks": "Disks",
+      "memory": "Memory",
+      "network": "Network",
+      "logs": "Logs"
+    }
+  },
+  "sysinfo": {
+    "os": {
+      "header": "OS",
+      "family": "Family",
+      "name": "Name",
+      "version": "Version",
+      "kernel": "Kernel",
+      "url": "URL"
+    },
+    "hardware": {
+      "header": "Hardware",
+      "cpu": "CPU",
+      "ram": "Memory",
+      "swap": "Swap"
+    },
+    "network": {
+      "header": "Network",
+      "iface": "Interface",
+      "hostname": "Hostname",
+      "wifi": "WiFi",
+      "eth": "Ethernet"
+    },
+    "time": {
+      "header": "Time",
+      "serverTime": "Time on server",
+      "serverTZ": "Server timezone",
+      "uptime": "Uptime"
+    },
+    "python": {
+      "implementation": "Implementation",
+      "venv": "Venv"
+    }
+  },
+  "cpuinfo": {
+    "loadChart": "CPU load chart",
+    "freqChart": "CPU frequency chart",
+    "loadChartTitle": "CPU Load",
+    "freqChartTitle": "CPU Frequency",
+    "loadChartAxis": "Load",
+    "freqChartAxis": "Frequency",
+    "details": "CPU details",
+    "average": "Average {0} min",
+    "core": "Core"
+  },
+  "disksinfo": {
+    "header": "Mountpoints",
+    "device": "Device",
+    "mountpoint": "Mountpoint",
+    "type": "Type",
+    "options": "Options",
+    "usage": "Usage"
+  },
+  "memoryinfo": {
+    "ram": "RAM Load",
+    "swap": "Swap Load",
+    "ramChart": "RAM load chart",
+    "swapChart": "Swap load chart",
+    "ramChartAxis": "RAM Used",
+    "swapChartAxis": "Swap Used"
+  },
+  "networkinfo": {
+    "ifaceCardTitle": "{0} Info",
+    "address": "Address",
+    "netmask": "Netmask",
+    "broadcast": "Broadcast",
+    "bandwidthCardTitle": "{0} Bandwidth",
+    "bandwidth": "Bandwidth",
+    "download": "Download",
+    "upload": "Upload"
+  },
+  "logsinfo": {
+    "priority": {
+      "label": "Priority",
+      "hint": "Messages with this priority will be displayed",
+      "values": {
+        "emerg": "Emergency",
+        "alert": "Alert and above",
+        "crit": "Critical and above",
+        "error": "Error and above",
+        "warn": "Warning and above",
+        "notice": "Notice and above",
+        "info": "Info and above",
+        "debug": "Debug and above"
+      }
+    },
+    "identifier": {
+      "label": "identifier",
+      "hint": "Logs with this ID will be displayed"
+    },
+    "bootID": {
+      "label": "Boot ID",
+      "hint": "Logs of this boot will be displayed",
+      "validError": "Must be a number!"
+    }
+  }
+}

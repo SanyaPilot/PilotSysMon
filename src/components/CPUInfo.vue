@@ -32,7 +32,7 @@
                 <v-spacer/>
                 <div v-for="i in cpu.threads" :key="i" class="py-1">
                   <div class="d-flex justify-space-between">
-                    <span>Core {{i}}</span><span>{{ load.perCPU[i - 1] }}%</span>
+                    <span>{{ $t('cpuinfo.core') + ' ' + i }}</span><span>{{ load.perCPU[i - 1] }}%</span>
                   </div>
                   <v-progress-linear :value="load.perCPU[i - 1]"></v-progress-linear>
                 </div>
@@ -52,7 +52,7 @@
               :outlined="$vuetify.breakpoint.mobile"
             >
               <v-card-title class="justify-space-between">
-                CPU load chart
+                {{ $t('cpuinfo.loadChart') }}
               </v-card-title>
               <v-card-text>
                 <div class="chart">
@@ -67,7 +67,7 @@
               :outlined="$vuetify.breakpoint.mobile"
             >
               <v-card-title class="justify-space-between">
-                CPU frequency chart
+                {{ $t('cpuinfo.freqChart') }}
               </v-card-title>
               <v-card-text>
                 <div class="chart">
@@ -86,7 +86,6 @@
 </template>
 
 <script>
-//import { mdiWifiStrength3, mdiLanPending, mdiClockOutline, mdiServer } from '@mdi/js'
 import LineChart from '../charts/lineChart.js'
 import CPUDetails from './import/CPUDetails.vue'
 import { getCPUSummaryData, getCPUInfoData } from '../API/cpu.js'
@@ -101,91 +100,93 @@ export default {
     CPUDetails
   },
 
-  data: () => ({
-    loadChart: {
-      datacollection: null,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
+  data: function() {
+    return {
+      loadChart: {
+        datacollection: null,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            xAxes: [{
               display: true,
-              labelString: 'Time'
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Load'
-            },
-            ticks: {
-              min: 0,
-              max: 100,
-              callback: function(value) {
-                return value + '%';
+              scaleLabel: {
+                display: true,
+                labelString: this.$t('common.time')
               }
-            }
-          }]
-        }
-      }
-    },
-    freqChart: {
-      datacollection: null,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
+            }],
+            yAxes: [{
               display: true,
-              labelString: 'Time'
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Frequency'
-            },
-            ticks: {
-              suggestedMin: null,
-              suggestedMax: null,
-              callback: function(value) {
-                return value + 'MHz';
+              scaleLabel: {
+                display: true,
+                labelString: this.$t('cpuinfo.loadChartAxis')
+              },
+              ticks: {
+                min: 0,
+                max: 100,
+                callback: function(value) {
+                  return value + '%';
+                }
               }
-            }
-          }]
+            }]
+          }
         }
+      },
+      freqChart: {
+        datacollection: null,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            xAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: this.$t('common.time')
+              }
+            }],
+            yAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: this.$t('cpuinfo.freqChartAxis')
+              },
+              ticks: {
+                suggestedMin: null,
+                suggestedMax: null,
+                callback: function(value) {
+                  return value + 'MHz';
+                }
+              }
+            }]
+          }
+        }
+      },
+      sysload: [
+        {name: this.$t('cpuinfo.average', [1]), value: "N/A"},
+        {name: this.$t('cpuinfo.average', [5]), value: "N/A"},
+        {name: this.$t('cpuinfo.average', [15]), value: "N/A"},
+      ],
+      details: [],
+      cpuName: null,
+      load: {
+        average: [],
+        perCPU: [],
+        timestamps: []
+      },
+      freq: {
+        min: null,
+        max: null,
+        average: [],
+        perCPU: [],
+        timestamps: []
+      },
+      cpu: {
+        cores: 6,
+        threads: 12
       }
-    },
-    sysload: [
-      {name: 'Average 1 min:', value: "N/A"},
-      {name: 'Average 5 min:', value: "N/A"},
-      {name: 'Average 15 min:', value: "N/A"},
-    ],
-    details: [],
-    cpuName: null,
-    load: {
-      average: [],
-      perCPU: [],
-      timestamps: []
-    },
-    freq: {
-      min: null,
-      max: null,
-      average: [],
-      perCPU: [],
-      timestamps: []
-    },
-    cpu: {
-      cores: 6,
-      threads: 12
     }
-  }),
+  },
   async created() {
     await this.updateCPUInfoData()
     await this.updateCPUSummaryData()
@@ -211,7 +212,7 @@ export default {
         labels: timestamps,
         datasets: [
           {
-            label: 'CPU Load',
+            label: this.$t('cpuinfo.loadChartTitle'),
             fill: false,
             tension: 0.1,
             pointBackgroundColor: this.$vuetify.theme.themes.light.primary,
@@ -230,7 +231,7 @@ export default {
         labels: timestamps,
         datasets: [
           {
-            label: 'CPU Frequency',
+            label: this.$t('cpuinfo.freqChartTitle'),
             fill: false,
             tension: 0.1,
             pointBackgroundColor: this.$vuetify.theme.themes.light.primary,
@@ -258,9 +259,9 @@ export default {
       this.load.perCPU = cpu.load_percent.per_cpu
       this.load.timestamps.push(Date.now())
       this.sysload = [
-        {name: 'Average 1 min:', value: cpu.load[0]},
-        {name: 'Average 5 min:', value: cpu.load[1]},
-        {name: 'Average 15 min:', value: cpu.load[2]},
+        {name: this.$t('cpuinfo.average', [1]), value: cpu.load[0]},
+        {name: this.$t('cpuinfo.average', [5]), value: cpu.load[1]},
+        {name: this.$t('cpuinfo.average', [15]), value: cpu.load[2]},
       ]
 
       if (this.freq.average.length == 10) {

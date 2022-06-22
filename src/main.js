@@ -3,6 +3,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import vuetify from './plugins/vuetify'
 
+// Translation support
+import i18n from './i18n'
+
 // Components
 import App from './App.vue'
 import SysInfo from './components/SysInfo.vue'
@@ -33,5 +36,6 @@ const router = new VueRouter({
 new Vue({
   router,
   vuetify,
+  i18n,
   render: h => h(App)
 }).$mount('#app')
