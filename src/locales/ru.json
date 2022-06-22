@@ -1,0 +1,125 @@
+{
+  "common": {
+    "ipv4": "IPv4",
+    "ipv6": "IPv6",
+    "mac": "MAC",
+    "python": "Python",
+    "version": "Версия",
+    "time": "Время",
+    "date": "Дата",
+    "reset": "Сброс"
+  },
+  "ui": {
+    "headers": {
+      "system": "О системе",
+      "cpu": "О процессоре",
+      "disks": "О накопителях",
+      "memory": "О системной памяти",
+      "network": "Информация об интерфейсах {0}",
+      "logs": "Системные логи"
+    },
+    "items": {
+      "system": "О системе",
+      "cpu": "Процессор",
+      "disks": "Диски",
+      "memory": "Память",
+      "network": "Сеть",
+      "logs": "Логи"
+    }
+  },
+  "sysinfo": {
+    "os": {
+      "header": "ОС",
+      "family": "Семейство",
+      "name": "Название",
+      "version": "Версия",
+      "kernel": "Ядро",
+      "url": "URL"
+    },
+    "hardware": {
+      "header": "Оборудование",
+      "cpu": "CPU",
+      "ram": "ОЗУ",
+      "swap": "Подкачка"
+    },
+    "network": {
+      "header": "Сеть",
+      "iface": "Интерфейс",
+      "hostname": "Имя хоста",
+      "wifi": "WiFi",
+      "eth": "Ethernet"
+    },
+    "time": {
+      "header": "Время",
+      "serverTime": "Время на сервере",
+      "serverTZ": "Часовой пояс на сервере",
+      "uptime": "Аптайм"
+    },
+    "python": {
+      "implementation": "Реализация",
+      "venv": "Venv"
+    }
+  },
+  "cpuinfo": {
+    "loadChart": "График загрузки",
+    "freqChart": "График частоты",
+    "loadChartTitle": "Загрузка процессора",
+    "freqChartTitle": "Частота процессора",
+    "loadChartAxis": "Загрузка",
+    "freqChartAxis": "Частота",
+    "details": "Подробная информация",
+    "average": "Ср. загрузка за {0} мин",
+    "core": "Ядро"
+  },
+  "disksinfo": {
+    "header": "Точки монтирования",
+    "device": "Устройство",
+    "mountpoint": "Точка монтирования",
+    "type": "Тип",
+    "options": "Опции",
+    "usage": "Загруженность"
+  },
+  "memoryinfo": {
+    "ram": "Загрузка ОЗУ",
+    "swap": "Загрузка подкачки",
+    "ramChart": "График загрузки ОЗУ",
+    "swapChart": "График загрузки подкачки",
+    "ramChartAxis": "Использовано ОЗУ",
+    "swapChartAxis": "Использовано подкачки"
+  },
+  "networkinfo": {
+    "ifaceCardTitle": "Информация {0}",
+    "address": "Адрес",
+    "netmask": "Сетевая маска",
+    "broadcast": "Broadcast",
+    "bandwidthCardTitle": "Использование {0}",
+    "bandwidth": "Скорость",
+    "download": "Скачивание",
+    "upload": "Отдача"
+  },
+  "logsinfo": {
+    "priority": {
+      "label": "Приоритет",
+      "hint": "Сообщения с этим приоритетом будут показаны",
+      "values": {
+        "emerg": "Emergency",
+        "alert": "Alert и выше",
+        "crit": "Critical и выше",
+        "error": "Error и выше",
+        "warn": "Warning и выше",
+        "notice": "Notice и выше",
+        "info": "Info и выше",
+        "debug": "Debug и выше"
+      }
+    },
+    "identifier": {
+      "label": "Идентификатор",
+      "hint": "Логи с этим ID будут показаны"
+    },
+    "bootID": {
+      "label": "ID загрузки",
+      "hint": "Логи этой загрузки будут показаны",
+      "validError": "Должно быть числом!"
+    }
+  }
+}
