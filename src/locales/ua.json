@@ -1,0 +1,125 @@
+{
+  "common": {
+    "ipv4": "IPv4",
+    "ipv6": "IPv6",
+    "mac": "MAC",
+    "python": "Python",
+    "version": "Версія",
+    "time": "Час",
+    "date": "Дата",
+    "reset": "Скинути"
+  },
+  "ui": {
+    "headers": {
+      "system": "Про систему",
+      "cpu": "Про ЦП",
+      "disks": "Про пристрої зберігання даних",
+      "memory": "Про системну пам'ять",
+      "network": "Інформація про інтерфейси {0}",
+      "logs": "Системні журнали"
+    },
+    "items": {
+      "system": "Система",
+      "cpu": "ЦП",
+      "disks": "Диски",
+      "memory": "Пам'ять",
+      "network": "Мережа",
+      "logs": "Журнали"
+    }
+  },
+  "sysinfo": {
+    "os": {
+      "header": "ОС",
+      "family": "Сімейство",
+      "name": "Назва",
+      "version": "Версія",
+      "kernel": "Ядро",
+      "url": "URL"
+    },
+    "hardware": {
+      "header": "Апаратне забезпечення",
+      "cpu": "ЦП",
+      "ram": "Пам'ять",
+      "swap": "SWAP"
+    },
+    "network": {
+      "header": "Мережа",
+      "iface": "Інтерфейс",
+      "hostname": "Ім'я хоста",
+      "wifi": "WiFi",
+      "eth": "Ethernet"
+    },
+    "time": {
+      "header": "Час",
+      "serverTime": "Час на сервері",
+      "serverTZ": "Часовий пояс сервера",
+      "uptime": "Час роботи"
+    },
+    "python": {
+      "implementation": "Реалізація",
+      "venv": "Venv"
+    }
+  },
+  "cpuinfo": {
+    "loadChart": "Діаграма навантаження ЦП",
+    "freqChart": "Діаграма частоти ЦП",
+    "loadChartTitle": "Навантаження ЦП",
+    "freqChartTitle": "Частота ЦП",
+    "loadChartAxis": "Навантаження",
+    "freqChartAxis": "Частота",
+    "details": "Деталі ЦП",
+    "average": "В середньому за {0} хв",
+    "core": "Ядро"
+  },
+  "disksinfo": {
+    "header": "Точки монтування",
+    "device": "Пристрій",
+    "mountpoint": "Точка монтування",
+    "type": "Тип",
+    "options": "Налаштування",
+    "usage": "Використання"
+  },
+  "memoryinfo": {
+    "ram": "Навантаження RAM",
+    "swap": "Навантаження SWAP",
+    "ramChart": "Діаграма навантаження RAM",
+    "swapChart": "Діаграма навантаження SWAP",
+    "ramChartAxis": "Використовується RAM",
+    "swapChartAxis": "Використовується SWAP"
+  },
+  "networkinfo": {
+    "ifaceCardTitle": "Інформація {0}",
+    "address": "Адреса",
+    "netmask": "Мережева маска",
+    "broadcast": "Broadcast",
+    "bandwidthCardTitle": "Пропускна здатність {0}",
+    "bandwidth": "Пропускна здатність",
+    "download": "Скачування",
+    "upload": "Завантаження"
+  },
+  "logsinfo": {
+    "priority": {
+      "label": "Пріорітет",
+      "hint": "Сообщения с этим приоритетом будут отображаться",
+      "values": {
+        "emerg": "Emergency",
+        "alert": "Alert і вище",
+        "crit": "Critical і вище",
+        "error": "Error і вище",
+        "warn": "Warning і вище",
+        "notice": "Notice і вище",
+        "info": "Info і вище",
+        "debug": "Debug і вище"
+      }
+    },
+    "identifier": {
+      "label": "ідентифікатор",
+      "hint": "Відобразяться журнали з цим ідентифікатором"
+    },
+    "bootID": {
+      "label": "Ідентифікатор завантаження",
+      "hint": "Відобразяться журнали цього завантаження",
+      "validError": "Має бути число!"
+    }
+  }
+}
