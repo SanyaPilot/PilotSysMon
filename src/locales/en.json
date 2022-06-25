@@ -1,4 +1,5 @@
 {
+  "name": "English",
   "common": {
     "ipv4": "IPv4",
     "ipv6": "IPv6",
@@ -9,6 +10,13 @@
     "date": "Date",
     "reset": "Reset"
   },
+  "settings": {
+    "language": {
+      "title": "Language",
+      "subtitle": "You can change app language",
+      "hint": "Select language"
+    }
+  },
   "ui": {
     "headers": {
       "system": "About system",
@@ -16,7 +24,8 @@
       "disks": "Storage devices info",
       "memory": "System memory info",
       "network": "{0} Interfaces info",
-      "logs": "System logs"
+      "logs": "System logs",
+      "settings": "Settings"
     },
     "items": {
       "system": "System info",
@@ -24,7 +33,8 @@
       "disks": "Disks",
       "memory": "Memory",
       "network": "Network",
-      "logs": "Logs"
+      "logs": "Logs",
+      "settings": "Settings"
     }
   },
   "sysinfo": {

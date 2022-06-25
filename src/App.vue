@@ -77,7 +77,8 @@ export default {
           { text: this.$t('ui.items.disks'), icon: 'mdi-database', view: 'disks'},
           { text: this.$t('ui.items.memory'), icon: 'mdi-memory', view: 'memory' },
           { text: this.$t('ui.items.network'), icon: 'mdi-server-network', view: 'network' },
-          { text: this.$t('ui.items.logs'), icon: 'mdi-bug', view: 'logs' }
+          { text: this.$t('ui.items.logs'), icon: 'mdi-bug', view: 'logs' },
+          { text: this.$t('ui.items.settings'), icon: 'mdi-cog', view: 'settings' }
         ]
       },
       headers: [
@@ -86,7 +87,8 @@ export default {
         this.$t('ui.headers.disks'),
         this.$t('ui.headers.memory'),
         null,
-        this.$t('ui.headers.logs')
+        this.$t('ui.headers.logs'),
+        this.$t('ui.headers.settings')
       ],
       titleShown: false,
       mainViewShown: false

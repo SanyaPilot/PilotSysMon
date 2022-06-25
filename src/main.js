@@ -14,6 +14,7 @@ import DisksInfo from './components/DisksInfo.vue'
 import MemoryInfo from './components/MemoryInfo.vue'
 import NetworkInfo from './components/NetworkInfo.vue'
 import LogsInfo from './components/LogsInfo.vue'
+import SettingsPanel from './components/SettingsPanel.vue'
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,8 @@ const routes = [
   { path: '/disks', name: 'disks', component: DisksInfo },
   { path: '/memory', name: 'memory', component: MemoryInfo },
   { path: '/network', name: 'network', component: NetworkInfo },
-  { path: '/logs', name: 'logs', component: LogsInfo }
+  { path: '/logs', name: 'logs', component: LogsInfo },
+  { path: '/settings', name: 'settings', component: SettingsPanel }
 ]
 
 const router = new VueRouter({
