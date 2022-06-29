@@ -6,11 +6,17 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
   theme: {
+    dark: window.localStorage.getItem('darkTheme') || false,
     themes: {
       light: {
-        primary: colors.amber.darken1, // #E53935
-        secondary: colors.amber.lighten4, // #FFCDD2
-        accent: colors.indigo.base, // #3F51B5
+        primary: colors.amber.darken1,
+        //secondary: colors.amber.lighten4,
+        accent: colors.amber.darken1,
+      },
+      dark: {
+        primary: colors.yellow.darken1,
+        //secondary: colors.yellow.lighten4,
+        accent: colors.yellow.darken1,
       },
     },
     icons: {

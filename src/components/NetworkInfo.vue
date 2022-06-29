@@ -175,8 +175,8 @@ export default {
               label: this.$t('networkinfo.download'),
               fill: false,
               tension: 0.1,
-              pointBackgroundColor: this.$vuetify.theme.themes.light.primary,
-              borderColor: this.$vuetify.theme.themes.light.primary,
+              pointBackgroundColor: this.$vuetify.theme.currentTheme.primary,
+              borderColor: this.$vuetify.theme.currentTheme.primary,
               data: data.download
             },
             {

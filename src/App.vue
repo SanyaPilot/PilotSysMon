@@ -7,9 +7,10 @@
     >
       <v-app-bar-nav-icon
         @click="triggerDrawer()"
+        :class="$vuetify.theme.isDark ? 'black--text' : ''"
       ></v-app-bar-nav-icon>
       <v-scroll-x-reverse-transition origin="center center">
-        <v-toolbar-title v-show="titleShown">{{ headers[drawer.selectedItem] }}</v-toolbar-title>
+        <v-toolbar-title v-show="titleShown" :class="$vuetify.theme.isDark ? 'black--text' : ''">{{ headers[drawer.selectedItem] }}</v-toolbar-title>
       </v-scroll-x-reverse-transition>
     </v-app-bar>
 
@@ -25,7 +26,7 @@
       >
         <v-list-item-group
           v-model="drawer.tempSelectedItem"
-          color="primary"
+          color="accent"
           mandatory
         >
           <v-list-item

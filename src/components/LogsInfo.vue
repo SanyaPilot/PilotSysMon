@@ -93,7 +93,7 @@
     <div v-for="day in paginatedLogs[page - 1]" :key="day[0]">
       <h5 class="text-md-h5 text-h6 mt-3">{{ new Date(day[0] * 24 * 60 * 60 * 1000).toLocaleString(
         {}, {month: 'long', day: 'numeric', year:'numeric'}) }}</h5>
-      <v-simple-table v-if="$vuetify.breakpoint.mdAndUp">
+      <v-simple-table v-if="$vuetify.breakpoint.mdAndUp" class="rounded-lg">
         <template v-slot:default>
           <colgroup>
             <col style="width: 56px">
@@ -111,7 +111,7 @@
           </tbody>
         </template>
       </v-simple-table>
-      <v-simple-table v-else>
+      <v-simple-table class="rounded-lg" v-else>
         <template v-slot:default>
           <colgroup>
             <col>

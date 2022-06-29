@@ -215,8 +215,8 @@ export default {
             label: this.$t('cpuinfo.loadChartTitle'),
             fill: false,
             tension: 0.1,
-            pointBackgroundColor: this.$vuetify.theme.themes.light.primary,
-            borderColor: this.$vuetify.theme.themes.light.primary,
+            pointBackgroundColor: this.$vuetify.theme.currentTheme.primary,
+            borderColor: this.$vuetify.theme.currentTheme.primary,
             data: this.load.average
           },
         ]
@@ -234,8 +234,8 @@ export default {
             label: this.$t('cpuinfo.freqChartTitle'),
             fill: false,
             tension: 0.1,
-            pointBackgroundColor: this.$vuetify.theme.themes.light.primary,
-            borderColor: this.$vuetify.theme.themes.light.primary,
+            pointBackgroundColor: this.$vuetify.theme.currentTheme.primary,
+            borderColor: this.$vuetify.theme.currentTheme.primary,
             data: this.freq.average
           },
         ]

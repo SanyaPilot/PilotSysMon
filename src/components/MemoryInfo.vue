@@ -250,8 +250,8 @@ export default {
             label: this.$t('memoryinfo.ram'),
             fill: false,
             tension: 0.1,
-            pointBackgroundColor: this.$vuetify.theme.themes.light.primary,
-            borderColor: this.$vuetify.theme.themes.light.primary,
+            pointBackgroundColor: this.$vuetify.theme.currentTheme.primary,
+            borderColor: this.$vuetify.theme.currentTheme.primary,
             data: this.ram.usages
           },
         ]
@@ -272,8 +272,8 @@ export default {
             label: this.$t('memoryinfo.swap'),
             fill: false,
             tension: 0.1,
-            pointBackgroundColor: this.$vuetify.theme.themes.light.primary,
-            borderColor: this.$vuetify.theme.themes.light.primary,
+            pointBackgroundColor: this.$vuetify.theme.currentTheme.primary,
+            borderColor: this.$vuetify.theme.currentTheme.primary,
             data: this.swap.usages
           },
         ]

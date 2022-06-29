@@ -15,6 +15,13 @@
       "title": "Language",
       "subtitle": "You can change app language",
       "hint": "Select language"
+    },
+    "theme": {
+      "title": "Theme",
+      "subtitle": "You can change theme type, light or dark",
+      "hint": "Select theme",
+      "light": "Light",
+      "dark": "Dark"
     }
   },
   "ui": {
