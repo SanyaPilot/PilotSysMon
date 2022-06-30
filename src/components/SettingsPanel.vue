@@ -43,7 +43,7 @@
       <v-card-text class="text-center">
         <img :src="require('../../public/PilotSysMon.svg')" width=250>
         <h4 class="text-h4 mb-2 mt-3">PilotSysMon</h4>
-        <h6 class="text-h6">{{ $t('settings.about.version', ['1.1-rc1']) }}</h6><br/>
+        <h6 class="text-h6">{{ $t('settings.about.version', ['1.1']) }}</h6><br/>
         <p v-html="$t('settings.about.description')"></p><br/>
         <h6 class="text-h6">{{ $t('settings.about.contribsTitle') }}</h6>
         <div class="d-flex align-center mb-2 justify-space-between" v-for="i in contributors" :key="i.name">
