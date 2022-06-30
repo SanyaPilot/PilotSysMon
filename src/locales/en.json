@@ -22,6 +22,16 @@
       "hint": "Select theme",
       "light": "Light",
       "dark": "Dark"
+    },
+    "about": {
+      "version": "Version: {0}",
+      "description": "Opensource material design Vue.js 2 system monitor<br/>Published under GPLv3 public license",
+      "contribsTitle": "Contributors",
+      "contribs": {
+        "SanyaPilot": "Main developer",
+        "Ultra119": "Ukrainian translation",
+        "tdrkDev": "Nice icon"
+      }
     }
   },
   "ui": {

@@ -1,0 +1,50 @@
+<svg id="Слой_1" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Безымянный_градиент_2);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #baf7ff;
+        stroke-linecap: round;
+        stroke-width: 20px;
+      }
+
+      .cls-3 {
+        fill-rule: evenodd;
+        fill: url(#Безымянный_градиент_3);
+      }
+
+      .cls-4 {
+        fill: #a2ddff;
+      }
+
+      .cls-5 {
+        fill: url(#Безымянный_градиент_4);
+      }
+    </style>
+    <linearGradient id="Безымянный_градиент_2" data-name="Безымянный градиент 2" x1="586.47" y1="863.43" x2="487.97" y2="177.93" gradientTransform="matrix(1, 0, 0, -1, -140, 840)" gradientUnits="userSpaceOnUse">
+      <stop offset="0"/>
+      <stop offset="1" stop-color="#252525"/>
+    </linearGradient>
+    <linearGradient id="Безымянный_градиент_3" data-name="Безымянный градиент 3" x1="194.08" y1="480.34" x2="913.78" y2="480.34" gradientTransform="matrix(1, 0, 0, -1, 0, 1080)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00ff94"/>
+      <stop offset="1" stop-color="#00ffd1"/>
+    </linearGradient>
+    <linearGradient id="Безымянный_градиент_4" data-name="Безымянный градиент 4" x1="354.03" y1="799.94" x2="311.03" y2="511.44" gradientTransform="matrix(1, 0, 0, -1, 0, 1080)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00d1ff"/>
+      <stop offset="1" stop-color="#00a3ff"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <rect class="cls-1" width="800" height="600" rx="100"/>
+    <path class="cls-2" d="M789,595l62.36,62.36a20,20,0,0,1,0,28.28L789,748" transform="translate(-140 -240)"/>
+    <path class="cls-3" d="M140,711.86V683.57l65.8,65.81a10,10,0,0,0,13.68.43L347.72,637a30,30,0,0,1,41.16,1.44L490.75,741.56a10,10,0,0,0,16.3-3.07l83.64-194.32c10-23.21,42.44-24.43,54.15-2l24.33,46.57a10,10,0,0,0,18.15-.93l56.4-141.84A30,30,0,0,1,794,437.1l49,55.13a10,10,0,0,0,11.29,2.6L940,459.45v21.64l-78,32.23a30,30,0,0,1-33.87-7.8l-49-55.13a10,10,0,0,0-16.76,2.94l-56.4,141.84c-9.49,23.84-42.59,25.55-54.47,2.8L627.11,551.4a10,10,0,0,0-18.05.68L525.42,746.4a30,30,0,0,1-48.9,9.22L374.65,652.46a10,10,0,0,0-13.72-.48L232.69,764.83a30,30,0,0,1-41-1.31Z" transform="translate(-140 -240)"/>
+    <g>
+      <circle class="cls-4" cx="192.5" cy="184.5" r="127.5"/>
+      <path class="cls-5" d="M460,424.5A127.5,127.5,0,1,1,332.5,297V424.5Z" transform="translate(-140 -240)"/>
+    </g>
+  </g>
+</svg>
