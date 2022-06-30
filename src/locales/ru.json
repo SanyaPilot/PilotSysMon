@@ -61,6 +61,9 @@
       "name": "Название",
       "version": "Версия",
       "kernel": "Ядро",
+      "release": "Выпуск",
+      "build": "Сборка",
+      "edition": "Редакция",
       "url": "URL"
     },
     "hardware": {

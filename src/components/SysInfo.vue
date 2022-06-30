@@ -69,6 +69,8 @@ export default {
           return require('../assets/linux.svg')
         case 'Windows':
           return require('../assets/windows.svg')
+        case 'macOS':
+          return require('../assets/macOS.svg')
         default:
           return null
       }
@@ -78,12 +80,10 @@ export default {
     async updateOSData() {
       const data = await getOSData()
       let payload
-      switch (data.family){
+      payload = [{name: this.$t('sysinfo.os.family'), value: data.family}]
+      switch (data.family) {
         case "Linux":
-          payload = [
-            {name: this.$t('sysinfo.os.family'), value: data.family},
-            {name: this.$t('sysinfo.os.name'), value: data.name}
-          ]
+          payload.push({name: this.$t('sysinfo.os.name'), value: data.name})
           if (data.version){
             payload.push({name: this.$t('sysinfo.os.version'), value: data.version})
           }
@@ -92,6 +92,18 @@ export default {
             payload.push({name: this.$t('sysinfo.os.url'), value: data.url})
           }
           break
+
+        case "Windows":
+          payload.push({name: this.$t('sysinfo.os.release'), value: data.release})
+          payload.push({name: this.$t('sysinfo.os.build'), value: data.build})
+          payload.push({name: this.$t('sysinfo.os.edition'), value: data.edition})
+          break
+
+        default:
+          payload.push({name: this.$t('sysinfo.os.version'), value: data.release})
+          payload.push({name: this.$t('sysinfo.os.release'), value: data.build})
+          break
+
       }
 
       this.cards.os.data = payload

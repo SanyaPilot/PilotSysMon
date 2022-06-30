@@ -61,6 +61,9 @@
       "name": "Name",
       "version": "Version",
       "kernel": "Kernel",
+      "release": "Release",
+      "build": "Build",
+      "edition": "Edition",
       "url": "URL"
     },
     "hardware": {
