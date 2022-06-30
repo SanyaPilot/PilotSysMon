@@ -21,7 +21,6 @@ export default async function getLogsData(level, id, boot, day, since, until) {
     if (Number.isInteger(parseInt(boot))) {
       args += 'boot=' + boot
     }
-    console.log('/logs' + args)
     return await makeRequest('/logs' + args)
   }
     return await makeRequest('/logs')

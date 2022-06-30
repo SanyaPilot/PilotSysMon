@@ -103,7 +103,6 @@ export default {
       setTimeout(function() {
         this.mainViewShown = true
         this.$router.push(view)
-        console.log(view)
       }.bind(this), 400)
 
       setTimeout(function() {
@@ -129,8 +128,6 @@ export default {
   },
   mounted () {
     this.drawer.shown = this.$vuetify.breakpoint.mobile ? false : true
-    console.log(this.$vuetify.breakpoint)
-    console.log(this.$vuetify)
     this.titleShown = true
     this.mainViewShown = true
   }

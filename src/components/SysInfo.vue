@@ -136,7 +136,6 @@ export default {
       const data = await getTimeData()
       const d = new Date(data.uptime * 1000)
       const day = d.getUTCDate()
-      console.log(data);
       this.cards.time.data = [
         {name: this.$t('sysinfo.time.serverTime'), value: new Date(data.time * 1000).toLocaleTimeString('ru-RU', {timeZone: 'UTC'})},
         {name: this.$t('sysinfo.time.serverTZ'), value: data.timezone},

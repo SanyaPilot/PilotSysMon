@@ -100,7 +100,6 @@ export default {
     langItems() {
       let temp = []
       for (const lang of Object.entries(this.$i18n.messages)) {
-        console.log(lang)
         temp.push({text: lang[1].name, value: lang[0]})
       }
       return temp
