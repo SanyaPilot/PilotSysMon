@@ -50,13 +50,7 @@ export default {
 
   data: function() {
     return {
-      cards: {
-        os: {label: this.$t('sysinfo.os.header'), iconType: "svg", icon: "os", data: null},
-        hardware: {label: this.$t('sysinfo.hardware.header'), iconType: "icon", icon: mdiServer, data: null},
-        //network: {label: this.$t('sysinfo.network.header'), iconType: "icon", icon: "network", data: null},
-        time: {label: this.$t('sysinfo.time.header'), iconType: "icon", icon: mdiClockOutline, data: null},
-        backend: {label: this.$t('sysinfo.backend.header'), iconType: "svg", icon: "back", data: null},
-      },
+      cards: {},
       backendLang: null
     }
   },
@@ -153,50 +147,70 @@ export default {
                           ", " + d.getUTCHours() + ":" + d.getUTCMinutes() +
                           ":" + d.getUTCSeconds()},
       ]
-    },
-    async updateBackendInfo() {
-      const info = await getBackendInfo()
-      this.backendLang = info.lang
-      let newInfo = [
-        {name: this.$t('common.version'), value: info.version}
-      ]
-      switch (info.lang) {
-        case "python":
-          newInfo.push(...[
-            {name: this.$t('sysinfo.backend.lang'), value: this.$t('sysinfo.backend.python.name')},
-            {name: this.$t('sysinfo.backend.python.version'), value: info.lang_version},
-            {name: this.$t('sysinfo.backend.python.implementation'), value: info.implementation},
-            {name: this.$t('sysinfo.backend.python.venv'), value: info.venv_path ? info.venv_path : "Not used"},
-          ])
-          break
-        case "golang":
-          newInfo.push(...[
-            {name: this.$t('sysinfo.backend.lang'), value: this.$t('sysinfo.backend.golang.name')},
-            {name: this.$t('sysinfo.backend.golang.version'), value: info.lang_version},
-            {name: this.$t('sysinfo.backend.golang.commitHash'), value: info.commit_hash},
-            {name: this.$t('sysinfo.backend.golang.buildTime'), value: info.build_time},
-          ])
-          break
-        default:
-          newInfo.push(...[
-            {name: this.$t('sysinfo.backend.lang'), value: info.lang}
-          ])
-      }
-      this.cards.backend.data = newInfo
     }
   },
 
   async created() {
+    // Fetch backend info
+    const info = await getBackendInfo()
+    this.backendLang = info.lang
+
+    // Construct items
+    let cards = {
+      os: {label: this.$t('sysinfo.os.header'), iconType: "svg", icon: "os", data: null},
+      hardware: {label: this.$t('sysinfo.hardware.header'), iconType: "icon", icon: mdiServer, data: null},
+    }
+    // This feature is available only on Python backend
+    if (info.lang == "python") {
+      cards.network = {label: this.$t('sysinfo.network.header'), iconType: "icon", icon: "network", data: null}
+    }
+    cards.time = {label: this.$t('sysinfo.time.header'), iconType: "icon", icon: mdiClockOutline, data: null}
+
+    // Fill backend info card
+    let newInfo = [
+      {name: this.$t('common.version'), value: info.version}
+    ]
+    switch (info.lang) {
+      case "python":
+        newInfo.push(...[
+          {name: this.$t('sysinfo.backend.lang'), value: this.$t('sysinfo.backend.python.name')},
+          {name: this.$t('sysinfo.backend.python.version'), value: info.lang_version},
+          {name: this.$t('sysinfo.backend.python.implementation'), value: info.implementation},
+          {name: this.$t('sysinfo.backend.python.venv'), value: info.venv_path ? info.venv_path : "Not used"},
+        ])
+        break
+      case "golang":
+        newInfo.push(...[
+          {name: this.$t('sysinfo.backend.lang'), value: this.$t('sysinfo.backend.golang.name')},
+          {name: this.$t('sysinfo.backend.golang.version'), value: info.lang_version},
+          {name: this.$t('sysinfo.backend.golang.commitHash'), value: info.commit_hash},
+          {name: this.$t('sysinfo.backend.golang.buildTime'), value: info.build_time},
+        ])
+        break
+      default:
+        newInfo.push(...[
+          {name: this.$t('sysinfo.backend.lang'), value: info.lang}
+        ])
+    }
+    cards.backend = {label: this.$t('sysinfo.backend.header'), iconType: "svg", icon: "back", data: newInfo}
+    this.cards = cards
+
+    // Update everything else
     await this.updateOSData()
     await this.updateHardwareData()
-    //await this.updateNetworkData()
+    // This feature is available only on Python backend
+    if (info.lang == "python") {
+      await this.updateNetworkData()
+    }
     await this.updateTimeData()
-    await this.updateBackendInfo()
   },
   async activated() {
     updateTimer = setInterval(async function() {
       await this.updateHardwareData()
-      //await this.updateNetworkData()
+      // This feature is available only on Python backend
+      if (this.backendLang == "python") {
+        await this.updateNetworkData()
+      }
       await this.updateTimeData()
     }.bind(this), 3000)
   },

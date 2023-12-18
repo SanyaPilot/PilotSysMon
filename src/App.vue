@@ -60,6 +60,7 @@
 
 <script>
 import { getHostname } from './API/network.js'
+import getBackendInfo from './API/back_info.js'
 
 export default {
   name: 'App',
@@ -77,7 +78,6 @@ export default {
           { text: this.$t('ui.items.cpu'), icon: 'mdi-cpu-64-bit', view: 'cpu' },
           { text: this.$t('ui.items.disks'), icon: 'mdi-database', view: 'disks'},
           { text: this.$t('ui.items.memory'), icon: 'mdi-memory', view: 'memory' },
-          { text: this.$t('ui.items.network'), icon: 'mdi-server-network', view: 'network' },
           { text: this.$t('ui.items.logs'), icon: 'mdi-bug', view: 'logs' },
           { text: this.$t('ui.items.settings'), icon: 'mdi-cog', view: 'settings' }
         ]
@@ -87,7 +87,6 @@ export default {
         this.$t('ui.headers.cpu'),
         this.$t('ui.headers.disks'),
         this.$t('ui.headers.memory'),
-        null,
         this.$t('ui.headers.logs'),
         this.$t('ui.headers.settings')
       ],
@@ -123,8 +122,16 @@ export default {
     }
   },
   async created () {
+    // Check backend type
+    const info = await getBackendInfo()
+    
+    // This feature is available only on Python backend
+    if (info.lang == "python") {
+      // Insert network item
+      this.drawer.items.splice(4, 0, { text: this.$t('ui.items.network'), icon: 'mdi-server-network', view: 'network' })
+      this.headers.splice(4, 0, this.$t('ui.headers.network', [await getHostname()]))
+    }
     this.getSelectedItem()
-    this.headers[4] = this.$t('ui.headers.network', [await getHostname()])
   },
   mounted () {
     this.drawer.shown = this.$vuetify.breakpoint.mobile ? false : true
