@@ -241,8 +241,8 @@ export default {
       this.ramChart.options.scales.yAxes[0].ticks.max = parseFloat(this.ramInfo.Total)
       let context = this
       this.ramChart.options.scales.yAxes[0].ticks.callback = function(value) {
-                return value + context.ramInfo.Total.at(-1);
-              }
+        return value + context.ramInfo.Total.replace(/[\d.]+/g, '');
+      }
       this.ramChart.datacollection = {
         labels: timestamps,
         datasets: [
@@ -263,8 +263,8 @@ export default {
       this.swapChart.options.scales.yAxes[0].ticks.max = parseFloat(this.swapInfo.Total)
       let context = this
       this.swapChart.options.scales.yAxes[0].ticks.callback = function(value) {
-                return value + context.swapInfo.Total.at(-1);
-              }
+        return value + context.swapInfo.Total.replace(/[\d.]+/g, '');
+      }
       this.swapChart.datacollection = {
         labels: timestamps,
         datasets: [

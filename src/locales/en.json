@@ -4,7 +4,6 @@
     "ipv4": "IPv4",
     "ipv6": "IPv6",
     "mac": "MAC",
-    "python": "Python",
     "version": "Version",
     "time": "Time",
     "date": "Date",
@@ -85,9 +84,21 @@
       "serverTZ": "Server timezone",
       "uptime": "Uptime"
     },
-    "python": {
-      "implementation": "Implementation",
-      "venv": "Venv"
+    "backend": {
+      "header": "About server",
+      "lang": "Language",
+      "python": {
+        "name": "Python",
+        "implementation": "Implementation",
+        "venv": "Venv",
+        "version": "Python version"
+      },
+      "golang": {
+        "name": "Go",
+        "version": "Go version",
+        "commitHash": "Commit hash",
+        "buildTime": "Build date"
+      } 
     }
   },
   "cpuinfo": {

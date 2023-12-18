@@ -12,7 +12,7 @@
             {{card.label}}
             <v-img
               v-if="card.data && card.iconType == 'svg'"
-              :src="card.icon == 'os' ? getOSIcon : card.icon"
+              :src="card.icon == 'os' ? getOSIcon : card.icon == 'back' ? getBackIcon : card.icon"
               contain
               max-height="120"
               max-width="120"
@@ -41,7 +41,7 @@ import { getCPUSummaryData } from '../API/cpu.js'
 import getMemoryData from '../API/memory.js'
 import { getInterfaceAddressesData, getActiveInterface, getHostname } from '../API/network.js'
 import getTimeData from '../API/time.js'
-import getPythonData from '../API/python.js'
+import getBackendInfo from '../API/back_info.js'
 
 let updateTimer
 
@@ -53,10 +53,11 @@ export default {
       cards: {
         os: {label: this.$t('sysinfo.os.header'), iconType: "svg", icon: "os", data: null},
         hardware: {label: this.$t('sysinfo.hardware.header'), iconType: "icon", icon: mdiServer, data: null},
-        network: {label: this.$t('sysinfo.network.header'), iconType: "icon", icon: "network", data: null},
+        //network: {label: this.$t('sysinfo.network.header'), iconType: "icon", icon: "network", data: null},
         time: {label: this.$t('sysinfo.time.header'), iconType: "icon", icon: mdiClockOutline, data: null},
-        python: {label: this.$t('common.python'), iconType: "svg", icon: require('../assets/python.svg'), data: null},
+        backend: {label: this.$t('sysinfo.backend.header'), iconType: "svg", icon: "back", data: null},
       },
+      backendLang: null
     }
   },
   computed: {
@@ -75,6 +76,15 @@ export default {
           return null
       }
     },
+    getBackIcon: function() {
+      switch (this.backendLang) {
+        case "python":
+          return require('../assets/python.svg')
+        case "golang":
+          return require('../assets/golang.svg')
+      }
+      return null
+    }
   },
   methods: {
     async updateOSData() {
@@ -144,27 +154,49 @@ export default {
                           ":" + d.getUTCSeconds()},
       ]
     },
-    async updatePythonData() {
-      const python = await getPythonData()
-      this.cards.python.data = [
-        {name: this.$t('sysinfo.python.implementation'), value: python.implementation},
-        {name: this.$t('common.version'), value: python.version},
-        {name: this.$t('sysinfo.python.venv'), value: python.venv_path ? python.venv_path : "Not used"},
+    async updateBackendInfo() {
+      const info = await getBackendInfo()
+      this.backendLang = info.lang
+      let newInfo = [
+        {name: this.$t('common.version'), value: info.version}
       ]
+      switch (info.lang) {
+        case "python":
+          newInfo.push(...[
+            {name: this.$t('sysinfo.backend.lang'), value: this.$t('sysinfo.backend.python.name')},
+            {name: this.$t('sysinfo.backend.python.version'), value: info.lang_version},
+            {name: this.$t('sysinfo.backend.python.implementation'), value: info.implementation},
+            {name: this.$t('sysinfo.backend.python.venv'), value: info.venv_path ? info.venv_path : "Not used"},
+          ])
+          break
+        case "golang":
+          newInfo.push(...[
+            {name: this.$t('sysinfo.backend.lang'), value: this.$t('sysinfo.backend.golang.name')},
+            {name: this.$t('sysinfo.backend.golang.version'), value: info.lang_version},
+            {name: this.$t('sysinfo.backend.golang.commitHash'), value: info.commit_hash},
+            {name: this.$t('sysinfo.backend.golang.buildTime'), value: info.build_time},
+          ])
+          break
+        default:
+          newInfo.push(...[
+            {name: this.$t('sysinfo.backend.lang'), value: info.lang}
+          ])
+      }
+      this.cards.backend.data = newInfo
     }
   },
 
   async created() {
     await this.updateOSData()
     await this.updateHardwareData()
-    await this.updateNetworkData()
+    //await this.updateNetworkData()
     await this.updateTimeData()
-    await this.updatePythonData()
+    await this.updateBackendInfo()
   },
   async activated() {
     updateTimer = setInterval(async function() {
       await this.updateHardwareData()
-      await this.updateNetworkData()
+      //await this.updateNetworkData()
       await this.updateTimeData()
     }.bind(this), 3000)
   },

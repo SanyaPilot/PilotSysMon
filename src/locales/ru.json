@@ -4,7 +4,6 @@
     "ipv4": "IPv4",
     "ipv6": "IPv6",
     "mac": "MAC",
-    "python": "Python",
     "version": "Версия",
     "time": "Время",
     "date": "Дата",
@@ -85,9 +84,21 @@
       "serverTZ": "Часовой пояс на сервере",
       "uptime": "Аптайм"
     },
-    "python": {
-      "implementation": "Реализация",
-      "venv": "Venv"
+    "backend": {
+      "header": "О сервере",
+      "lang": "Язык",
+      "python": {
+        "name": "Python",
+        "implementation": "Реализация",
+        "venv": "Venv",
+        "version": "Версия Python"
+      },
+      "golang": {
+        "name": "Go",
+        "version": "Версия Go",
+        "commitHash": "Хэш коммита",
+        "buildTime": "Дата сборки"
+      }
     }
   },
   "cpuinfo": {
